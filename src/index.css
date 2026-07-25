@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --color-bg-dark: #072218;
+  --color-card-dark: #0d3224;
+  --color-bg-light: #f5f2eb;
+  --color-text-light: #f5f2eb;
+  --color-text-muted-light: #8da499;
+  --color-text-dark: #1e2522;
+  --color-text-muted-dark: #636b67;
+  --color-accent: #9e7047;
+  --color-accent-hover: #b38258;
+  --color-border-dark: #164635;
+  --color-border-light: #dcd7cb;
+  --color-stamp: #9c3d3d;
+  --color-success: #4c9e78;
+  --color-danger: #b84a39;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'Space Mono', Courier, monospace;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  font-size: 16px;
+  background-color: #072218;
+  color: var(--color-text-light);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 50% -10%, #0e3527 0%, #072218 45%, #04140e 100%) fixed;
+  color: var(--color-text-light);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-dark);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Selection Highlight */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg-dark);
+}

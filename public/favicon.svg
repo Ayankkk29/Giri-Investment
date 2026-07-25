@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <circle cx="60" cy="60" r="58" fill="#081d15" stroke="#9e7047" stroke-width="2.5" />
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#9e7047" stroke-width="1.8" />
+  <circle cx="60" cy="60" r="46" fill="none" stroke="#9e7047" stroke-width="1" stroke-dasharray="3,3" />
+  <text x="60" y="46" text-anchor="middle" fill="#9e7047" font-family="'Times New Roman', Georgia, serif" font-size="14" font-weight="700" letter-spacing="2.5">EST .</text>
+  <text x="60" y="78" text-anchor="middle" fill="#d4af37" font-family="'Times New Roman', Georgia, serif" font-size="24" font-weight="800" letter-spacing="1">1992</text>
+</svg>
