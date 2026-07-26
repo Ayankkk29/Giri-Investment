@@ -3638,7 +3638,9 @@ textarea.calc-number-input:focus {
 
 @media (max-width: 768px) {
   #calc-panel-header {
-    padding: 3rem 0 !important;
+    padding-top: 5.5rem !important;
+    padding-bottom: 3.5rem !important;
+    scroll-margin-top: 5.5rem;
   }
 
   #calc-panel-header .container.grid-2 {
@@ -3646,10 +3648,30 @@ textarea.calc-number-input:focus {
     gap: 2rem;
   }
 
+  /* Compact Floating Social Dock on Mobile */
+  .floating-social-dock {
+    right: 4px !important;
+    gap: 0.35rem !important;
+    z-index: 999 !important;
+  }
+
+  .social-dock-btn {
+    width: 32px !important;
+    height: 32px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .social-dock-btn svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  /* Calculator card clear margin from floating dock */
   .calculator-card {
     padding: 1.25rem 1rem !important;
     margin-top: 1rem;
-    width: 100%;
+    margin-right: 38px !important; /* Leaves dedicated right gutter for social dock buttons */
+    width: auto !important;
     box-sizing: border-box;
   }
 
@@ -3725,6 +3747,7 @@ textarea.calc-number-input:focus {
 @media (max-width: 400px) {
   .calculator-card {
     padding: 1rem 0.75rem !important;
+    margin-right: 34px !important;
   }
 
   .calc-number-input {
