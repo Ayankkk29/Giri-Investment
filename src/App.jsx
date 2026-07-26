@@ -1,6 +1,8 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { 
   ArrowRight, 
+  ArrowLeft,
+  Calculator,
   X, 
   Check, 
   Activity, 
@@ -217,6 +219,7 @@ function App() {
   const [selectedSlot, setSelectedSlot] = useState('');
   const [selectedDate, setSelectedDate] = useState('2026-07-23');
   const [scheduleSuccess, setScheduleSuccess] = useState(false);
+  const [showMobileCalcModal, setShowMobileCalcModal] = useState(false);
 
   // Invest Modal Form State
   const [investName, setInvestName] = useState('');
@@ -972,7 +975,27 @@ function LuxuryPreloader() {
                   </p>
                 </div>
 
-                <div className="calculator-card">
+                {/* Mobile / Tablet Button Card (iPhone, Pixel, Galaxy, iPad Mini) */}
+                <div className="mobile-calc-cta-card">
+                  <div className="calc-header">
+                    <div>
+                      <span className="caption-label dark" style={{ fontSize: '0.65rem' }}>Financial Calculator</span>
+                      <h3 className="calc-title" style={{ fontSize: '1.4rem', marginTop: '0.2rem' }}>SIP & Wealth Planner</h3>
+                    </div>
+                    <div className="live-badge">
+                      <span className="live-badge-dot"></span>
+                      LIVE
+                    </div>
+                  </div>
+                  <p className="subtext" style={{ fontSize: '0.88rem', margin: '0.75rem 0 1.25rem 0' }}>
+                    Calculate your SIP Growth, Retirement Corpus & Insurance Need in our dedicated full-screen calculator tool.
+                  </p>
+                  <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => setShowMobileCalcModal(true)}>
+                    <Calculator size={18} /> Open Financial Calculator <ArrowRight size={16} />
+                  </button>
+                </div>
+
+                <div className="calculator-card desktop-inline-calc-card">
                   <div className="calc-header">
                     <div>
                       <span className="caption-label dark" style={{ fontSize: '0.65rem' }}>Financial Calculator</span>
@@ -2879,6 +2902,237 @@ function LuxuryPreloader() {
                   </p>
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Dedicated Mobile Calculator Fullscreen Modal / Page */}
+      {showMobileCalcModal && (
+        <div className="mobile-calc-modal-overlay">
+          <div className="mobile-calc-modal-container">
+            <div className="mobile-calc-topbar">
+              <button className="mobile-calc-back-btn" onClick={() => setShowMobileCalcModal(false)}>
+                <ArrowLeft size={18} /> Back to Home
+              </button>
+              <div className="live-badge">
+                <span className="live-badge-dot"></span> LIVE CALCULATION
+              </div>
+            </div>
+
+            <div className="mobile-calc-modal-body">
+              <div className="calculator-card mobile-fullscreen-card">
+                <div className="calc-header" style={{ marginBottom: '1rem' }}>
+                  <div>
+                    <span className="caption-label dark" style={{ fontSize: '0.65rem' }}>Financial Calculator</span>
+                    <h3 className="calc-title">
+                      {activeTab === 'sip' && 'SIP Growth Planner'}
+                      {activeTab === 'retirement' && 'Retirement Corpus Planner'}
+                      {activeTab === 'insurance' && 'Insurance Cover Planner'}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="calc-tabs">
+                  <button className={`calc-tab ${activeTab === 'sip' ? 'active' : ''}`} onClick={() => setActiveTab('sip')}>SIP Calculator</button>
+                  <button className={`calc-tab ${activeTab === 'retirement' ? 'active' : ''}`} onClick={() => setActiveTab('retirement')}>Retirement Planner</button>
+                  <button className={`calc-tab ${activeTab === 'insurance' ? 'active' : ''}`} onClick={() => setActiveTab('insurance')}>Insurance Need</button>
+                </div>
+
+                {activeTab === 'sip' && (
+                  <div>
+                    <div className="calc-grid">
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Monthly SIP</span>
+                        <div className="calc-input-val-container">
+                          <span className="calc-input-symbol">₹</span>
+                          <input type="number" value={sipAmount} onChange={(e) => setSipAmount(Number(e.target.value))} className="calc-number-input" />
+                        </div>
+                        <input type="range" min="1000" max="100000" step="1000" value={sipAmount} onChange={(e) => setSipAmount(Number(e.target.value))} className="calc-slider" />
+                      </div>
+
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Expected Return</span>
+                        <div className="calc-input-val-container">
+                          <input type="number" value={sipRate} onChange={(e) => setSipRate(Number(e.target.value))} className="calc-number-input" />
+                          <span className="calc-input-symbol">%</span>
+                        </div>
+                        <input type="range" min="5" max="25" step="0.5" value={sipRate} onChange={(e) => setSipRate(Number(e.target.value))} className="calc-slider" />
+                      </div>
+
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Investment Period</span>
+                        <div className="calc-input-val-container">
+                          <input type="number" value={sipYears} onChange={(e) => setSipYears(Number(e.target.value))} className="calc-number-input" />
+                          <span className="calc-input-unit">Yrs</span>
+                        </div>
+                        <input type="range" min="1" max="40" value={sipYears} onChange={(e) => setSipYears(Number(e.target.value))} className="calc-slider" />
+                      </div>
+
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Goal Target</span>
+                        <div className="calc-input-val-container">
+                          <span className="calc-input-symbol">₹</span>
+                          <input type="number" value={sipTarget} onChange={(e) => setSipTarget(Number(e.target.value))} className="calc-number-input" />
+                        </div>
+                        <input type="range" min="1000000" max="500000000" step="1000000" value={sipTarget} onChange={(e) => setSipTarget(Number(e.target.value))} className="calc-slider" />
+                      </div>
+                    </div>
+
+                    <div style={{ marginBottom: '1.5rem', padding: '1rem', border: '1px solid var(--color-border-light)', borderRadius: '4px', backgroundColor: 'rgba(30, 37, 34, 0.02)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontFamily: 'var(--font-mono)', fontSize: '0.75rem' }}>
+                        <span>Goal Progress (vs {formatCurrency(sipTarget)})</span>
+                        <span style={{ fontWeight: '700' }}>{sipResults.progressPercent}%</span>
+                      </div>
+                      <div className="card-progress-bar-container" style={{ background: '#e2ded6', height: '6px', marginTop: 0 }}>
+                        <div className="card-progress-bar-fill" style={{ width: `${sipResults.progressPercent}%` }}></div>
+                      </div>
+                    </div>
+
+                    <div className="calc-results">
+                      <span className="calc-result-title">Projected Corpus</span>
+                      <div className="calc-result-value">{formatCurrency(sipResults.futureValue)}</div>
+                      <div className="calc-chart-container">
+                        <svg className="calc-chart-svg" viewBox="0 0 400 120" preserveAspectRatio="none">
+                          <defs>
+                            <linearGradient id="chart-gradient-mobile" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.4" />
+                              <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0.0" />
+                            </linearGradient>
+                          </defs>
+                          <path className="calc-chart-path-invested" d={`M 0 110 L 400 ${110 - (sipResults.totalInvested / sipResults.futureValue) * 90}`} />
+                          <path className="calc-chart-path-fill" d={`M 0 110 ${sipResults.chartPoints.map((pt, i) => {
+                            const x = (i / (sipResults.chartPoints.length - 1)) * 400;
+                            const y = 110 - (pt.corpus / sipResults.futureValue) * 90;
+                            return `L ${x} ${y}`;
+                          }).join(' ')} L 400 110 Z`} />
+                          <path className="calc-chart-path-line" d={`M 0 110 ${sipResults.chartPoints.map((pt, i) => {
+                            const x = (i / (sipResults.chartPoints.length - 1)) * 400;
+                            const y = 110 - (pt.corpus / sipResults.futureValue) * 90;
+                            return `L ${x} ${y}`;
+                          }).join(' ')}`} />
+                        </svg>
+                      </div>
+
+                      <div className="calc-chart-footer">
+                        <div>Total Invested: <span className="calc-chart-footer-val">{formatCurrency(sipResults.totalInvested)}</span></div>
+                        <div>Gain: <span className="calc-chart-footer-val" style={{ color: 'var(--color-success)' }}>+{formatCurrency(sipResults.estReturns)}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'retirement' && (
+                  <div>
+                    <div className="calc-grid">
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Current Age</span>
+                        <div className="calc-input-val-container">
+                          <input type="number" value={retAge} onChange={(e) => setRetAge(Number(e.target.value))} className="calc-number-input" />
+                          <span className="calc-input-unit">Yrs</span>
+                        </div>
+                        <input type="range" min="18" max="60" value={retAge} onChange={(e) => setRetAge(Number(e.target.value))} className="calc-slider" />
+                      </div>
+
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Retirement Age</span>
+                        <div className="calc-input-val-container">
+                          <input type="number" value={retTargetAge} onChange={(e) => setRetTargetAge(Number(e.target.value))} className="calc-number-input" />
+                          <span className="calc-input-unit">Yrs</span>
+                        </div>
+                        <input type="range" min={retAge + 1} max="80" value={retTargetAge} onChange={(e) => setRetTargetAge(Number(e.target.value))} className="calc-slider" />
+                      </div>
+
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Monthly Expense</span>
+                        <div className="calc-input-val-container">
+                          <span className="calc-input-symbol">₹</span>
+                          <input type="number" value={retExpenses} onChange={(e) => setRetExpenses(Number(e.target.value))} className="calc-number-input" />
+                        </div>
+                        <input type="range" min="10000" max="200000" step="5000" value={retExpenses} onChange={(e) => setRetExpenses(Number(e.target.value))} className="calc-slider" />
+                      </div>
+
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Expected Inflation</span>
+                        <div className="calc-input-val-container">
+                          <input type="number" value={retInflation} onChange={(e) => setRetInflation(Number(e.target.value))} className="calc-number-input" />
+                          <span className="calc-input-symbol">%</span>
+                        </div>
+                        <input type="range" min="4" max="10" step="0.5" value={retInflation} onChange={(e) => setRetInflation(Number(e.target.value))} className="calc-slider" />
+                      </div>
+
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Post-Retirement Return</span>
+                        <div className="calc-input-val-container">
+                          <input type="number" value={retPostReturn} onChange={(e) => setRetPostReturn(Number(e.target.value))} className="calc-number-input" />
+                          <span className="calc-input-symbol">%</span>
+                        </div>
+                        <input type="range" min="4" max="15" step="0.5" value={retPostReturn} onChange={(e) => setRetPostReturn(Number(e.target.value))} className="calc-slider" />
+                      </div>
+                    </div>
+
+                    <div className="calc-results">
+                      <span className="calc-result-title">Required Retirement Corpus</span>
+                      <div className="calc-result-value">{formatCurrency(retirementResults.corpusNeeded)}</div>
+                      <div className="ledger-receipt">
+                        <div className="receipt-line"><span>Years to Retirement</span><span>{retirementResults.yearsToRetire} Years</span></div>
+                        <div className="receipt-line"><span>Inflation Adjusted Expense</span><span>{formatCurrency(retirementResults.inflationAdjustedExpenses)}/mo</span></div>
+                        <div className="receipt-line"><span>Monthly Saving Needed (at 12%)</span><span style={{ color: 'var(--color-success)', fontWeight: 700 }}>{formatCurrency(retirementResults.monthlySavingsRequired)}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'insurance' && (
+                  <div>
+                    <div className="calc-grid">
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Annual Income</span>
+                        <div className="calc-input-val-container">
+                          <span className="calc-input-symbol">₹</span>
+                          <input type="number" value={insIncome} onChange={(e) => setInsIncome(Number(e.target.value))} className="calc-number-input" />
+                        </div>
+                        <input type="range" min="300000" max="5000000" step="50000" value={insIncome} onChange={(e) => setInsIncome(Number(e.target.value))} className="calc-slider" />
+                      </div>
+
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Total Liabilities/Loans</span>
+                        <div className="calc-input-val-container">
+                          <span className="calc-input-symbol">₹</span>
+                          <input type="number" value={insLiabilities} onChange={(e) => setInsLiabilities(Number(e.target.value))} className="calc-number-input" />
+                        </div>
+                        <input type="range" min="0" max="10000000" step="100000" value={insLiabilities} onChange={(e) => setInsLiabilities(Number(e.target.value))} className="calc-slider" />
+                      </div>
+
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">No. of Dependents</span>
+                        <div className="calc-input-val-container">
+                          <input type="number" value={insDependents} onChange={(e) => setInsDependents(Number(e.target.value))} className="calc-number-input" />
+                        </div>
+                        <input type="range" min="0" max="8" value={insDependents} onChange={(e) => setInsDependents(Number(e.target.value))} className="calc-slider" />
+                      </div>
+
+                      <div className="calc-input-group">
+                        <span className="caption-label dark">Liquid Assets Deductions</span>
+                        <div className="calc-input-val-container">
+                          <span className="calc-input-symbol">₹</span>
+                          <input type="number" value={insLiquidAssets} onChange={(e) => setInsLiquidAssets(Number(e.target.value))} className="calc-number-input" />
+                        </div>
+                        <input type="range" min="0" max="5000000" step="50000" value={insLiquidAssets} onChange={(e) => setInsLiquidAssets(Number(e.target.value))} className="calc-slider" />
+                      </div>
+                    </div>
+
+                    <div className="calc-results">
+                      <span className="calc-result-title">Recommended Term Insurance Cover</span>
+                      <div className="calc-result-value">{formatCurrency(insuranceResults.recommendedCover)}</div>
+                      <div className="ledger-receipt">
+                        <div className="receipt-line"><span>Income Replacement (10x)</span><span>{formatCurrency(insuranceResults.incomeMultiple)}</span></div>
+                        <div className="receipt-line"><span>Outstanding Loans added</span><span>+{formatCurrency(insLiabilities)}</span></div>
+                        <div className="receipt-line"><span>Assets deducted</span><span>-{formatCurrency(insLiquidAssets)}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
