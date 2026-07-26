@@ -831,10 +831,10 @@ function LuxuryPreloader() {
 
           <div className="header-actions">
             <button 
-              className={`nav-pill-btn ${currentPage === 'contact' ? 'active' : ''}`} 
-              onClick={() => { setCurrentPage('contact'); setMobileMenuOpen(false); }}
+              className="nav-start-investing-btn" 
+              onClick={() => setShowInvestModal(true)}
             >
-              CONTACT US
+              Start investing
             </button>
           </div>
         </div>
@@ -1216,7 +1216,7 @@ function LuxuryPreloader() {
               </div>
             </section>
 
-            <section className="section" style={{ borderTop: '1px solid var(--color-border-dark)' }}>
+            <section className="section">
               <div className="container" style={{ textAlign: 'center' }}>
                 <div className="section-tag" style={{ justifyContent: 'center', marginBottom: '1rem' }}>— TRUSTED NETWORK —</div>
                 <h2 className="title-serif-large" style={{ fontSize: '2.8rem', margin: '0.75rem 0' }}>
@@ -1396,7 +1396,7 @@ function LuxuryPreloader() {
 
                 <div className="mf-landing-grid">
                   <div className="mf-landing-card" onClick={() => setMfSubPage('selector')}>
-                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/fund_selector_tools.png")' }}></div>
+                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/india_mutual_funds.jpg")' }}></div>
                     <div className="mf-landing-card-overlay">
                       <h3 className="mf-landing-title">Fund Selector Tools</h3>
                       <span className="mf-landing-subtitle">Filter & Compare AMCs</span>
@@ -1410,7 +1410,7 @@ function LuxuryPreloader() {
                       if (element) element.scrollIntoView({ behavior: 'smooth' });
                     }, 100);
                   }}>
-                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/financial_planning.png")' }}></div>
+                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/india_mutual_funds.jpg")' }}></div>
                     <div className="mf-landing-card-overlay">
                       <h3 className="mf-landing-title">Financial Planning</h3>
                       <span className="mf-landing-subtitle">Growth & Pension Planners</span>
@@ -1418,7 +1418,7 @@ function LuxuryPreloader() {
                   </div>
 
                   <div className="mf-landing-card" onClick={() => setMfSubPage('baskets')}>
-                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/readymade_basket.png")' }}></div>
+                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/india_life_insurance.jpg")' }}></div>
                     <div className="mf-landing-card-overlay">
                       <h3 className="mf-landing-title">Readymade Basket</h3>
                       <span className="mf-landing-subtitle">Pre-curated Baskets</span>
@@ -1623,7 +1623,7 @@ function LuxuryPreloader() {
 
                 <div className="mf-landing-grid">
                   <div className="mf-landing-card" onClick={() => { setInsuranceSubPage('life'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/life_insurance.png")' }}></div>
+                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/india_life_insurance.jpg")' }}></div>
                     <div className="mf-landing-card-overlay">
                       <h3 className="mf-landing-title">Life Insurance</h3>
                       <span className="mf-landing-subtitle">Income Replacement (HLV)</span>
@@ -1631,7 +1631,7 @@ function LuxuryPreloader() {
                   </div>
 
                   <div className="mf-landing-card" onClick={() => { setInsuranceSubPage('general'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/general_insurance.png")' }}></div>
+                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/india_mutual_funds.jpg")' }}></div>
                     <div className="mf-landing-card-overlay">
                       <h3 className="mf-landing-title">General Insurance</h3>
                       <span className="mf-landing-subtitle">Asset & Vehicle Coverage</span>
@@ -1639,7 +1639,7 @@ function LuxuryPreloader() {
                   </div>
 
                   <div className="mf-landing-card" onClick={() => { setInsuranceSubPage('health'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/health_insurance.png")' }}></div>
+                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/india_health_insurance.jpg")' }}></div>
                     <div className="mf-landing-card-overlay">
                       <h3 className="mf-landing-title">Health Insurance</h3>
                       <span className="mf-landing-subtitle">Family Mediclaim Estimator</span>
@@ -2450,7 +2450,10 @@ function LuxuryPreloader() {
                   <div key={file.id} className="download-item-card">
                     <div className="download-item-info">
                       <h3 className="download-item-title">{file.title}</h3>
-                      <p className="download-item-meta">{file.desc} &nbsp;·&nbsp; <span style={{ color: 'var(--color-accent)' }}>PDF ({file.size})</span></p>
+                      <p className="download-item-desc">
+                        <span>{file.desc}</span>
+                        <span className="download-badge-pdf">PDF ({file.size})</span>
+                      </p>
                       
                       {downloadingFileId === file.id && (
                         <div className="download-progress-bar-container">
@@ -2459,19 +2462,18 @@ function LuxuryPreloader() {
                       )}
                       
                       {downloadCompletedId === file.id && (
-                        <div style={{ color: 'var(--color-success)', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', marginTop: '0.5rem', fontWeight: 6, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <Check size={12} /> Downloaded successfully to your computer!
+                        <div style={{ color: 'var(--color-success)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', marginTop: '0.5rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <Check size={14} /> Downloaded successfully to your computer!
                         </div>
                       )}
                     </div>
 
                     <button 
-                      className="btn btn-outline" 
-                      style={{ padding: '0.5rem 1.2rem', fontSize: '0.75rem', gap: '0.4rem' }}
+                      className="download-action-btn" 
                       onClick={() => handleDownloadTrigger(file.id)}
                       disabled={downloadingFileId !== null}
                     >
-                      <ArrowDownToLine size={14} /> {downloadingFileId === file.id ? 'Downloading...' : 'Download'}
+                      <ArrowDownToLine size={15} /> {downloadingFileId === file.id ? 'Downloading...' : 'Download'}
                     </button>
                   </div>
                 ))}

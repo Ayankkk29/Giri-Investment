@@ -1,28 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --color-bg-dark: #072218;
-  --color-card-dark: #0d3224;
-  --color-bg-light: #f5f2eb;
-  --color-text-light: #f5f2eb;
-  --color-text-muted-light: #8da499;
-  --color-text-dark: #1e2522;
-  --color-text-muted-dark: #636b67;
-  --color-accent: #9e7047;
-  --color-accent-hover: #b38258;
-  --color-border-dark: #164635;
-  --color-border-light: #dcd7cb;
-  --color-stamp: #9c3d3d;
-  --color-success: #4c9e78;
-  --color-danger: #b84a39;
+  --color-bg-dark: #0f172a;           /* Deep Corporate Navy */
+  --color-card-dark: #1e293b;         /* Slate Navy Card */
+  --color-bg-light: #ffffff;          /* Pure Crisp White Cards */
+  --color-text-light: #f8fafc;        /* Soft White Text on Dark Navy */
+  --color-text-muted-light: #94a3b8;  /* Muted Slate on Dark */
+  --color-text-dark: #0f172a;         /* High-Contrast Slate Text on Light */
+  --color-text-muted-dark: #64748b;   /* Professional Muted Slate Text */
+  --color-accent: #2563eb;            /* Royal Sapphire Blue */
+  --color-accent-hover: #1d4ed8;      /* Deep Royal Blue Hover */
+  --color-accent-light: rgba(37, 99, 235, 0.08); /* Soft Blue Tint */
+  --color-border-dark: #334155;       /* Border for Dark Containers */
+  --color-border-light: #e2e8f0;      /* Soft Light Border */
+  --color-stamp: #dc2626;             /* Crimson Verified Stamp */
+  --color-success: #16a34a;           /* Emerald Green Success */
+  --color-danger: #ef4444;            /* Red Danger */
 
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-mono: 'Space Mono', Courier, monospace;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
   font-size: 16px;
-  background-color: #072218;
-  color: var(--color-text-light);
+  background-color: #f8fafc;
+  color: var(--color-text-dark);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -36,8 +37,14 @@
 
 body {
   margin: 0;
-  background: radial-gradient(circle at 50% -10%, #0e3527 0%, #072218 45%, #04140e 100%) fixed;
-  color: var(--color-text-light);
+  background-color: #ffffff;
+  background-image: 
+    linear-gradient(rgba(248, 250, 252, 0.78), rgba(248, 250, 252, 0.78)),
+    url("/financial_infographics_watermark.jpg");
+  background-repeat: repeat;
+  background-size: 550px 550px;
+  background-attachment: fixed;
+  color: var(--color-text-dark);
   min-height: 100vh;
   overflow-x: hidden;
 }
