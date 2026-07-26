@@ -315,24 +315,24 @@ main > section {
 }
 
 .nav-start-investing-btn {
-  background-color: #0f172a;
+  background-color: var(--color-accent);
   color: #ffffff !important;
   font-family: var(--font-sans);
   font-size: 0.92rem;
   font-weight: 600;
   padding: 0.65rem 1.6rem;
   border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--color-accent);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.3);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
 }
 
 .nav-start-investing-btn:hover {
-  background-color: #2563eb;
-  border-color: #2563eb;
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.55);
 }
 
 /* Navigation Menu & Hover Effects */
