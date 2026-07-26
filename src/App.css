@@ -3632,6 +3632,110 @@ textarea.calc-number-input:focus {
   }
 }
 
+/* ==========================================================================
+   ENHANCED MOBILE & TOUCH RESPONSIVENESS FOR CALCULATOR SECTION
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  #calc-panel-header {
+    padding: 3rem 0 !important;
+  }
+
+  #calc-panel-header .container.grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+
+  .calculator-card {
+    padding: 1.25rem 1rem !important;
+    margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .calc-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .calc-title {
+    font-size: 1.35rem !important;
+  }
+
+  .calc-tabs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    padding-bottom: 0.6rem !important;
+    margin-bottom: 1.25rem !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.4rem !important;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .calc-tab {
+    white-space: nowrap !important;
+    flex-shrink: 0;
+    font-size: 0.72rem !important;
+    padding: 0.45rem 0.85rem !important;
+  }
+
+  .calc-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .calc-input-group {
+    padding: 0.75rem 0.85rem !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .calc-number-input {
+    font-size: 1.35rem !important;
+  }
+
+  .calc-slider {
+    height: 8px; /* Touch target for thumb sliders on phones */
+  }
+
+  .calc-slider::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+  }
+
+  .calc-results {
+    padding-top: 1rem !important;
+  }
+
+  .calc-result-value {
+    font-size: clamp(1.5rem, 5.5vw, 2.2rem) !important;
+    margin: 0.2rem 0 0.5rem 0 !important;
+    word-break: break-word;
+  }
+
+  .calc-chart-container {
+    height: 80px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .calculator-card {
+    padding: 1rem 0.75rem !important;
+  }
+
+  .calc-number-input {
+    font-size: 1.2rem !important;
+  }
+
+  .calc-result-value {
+    font-size: 1.45rem !important;
+  }
+}
+
 
 
 
