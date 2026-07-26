@@ -3950,11 +3950,12 @@ textarea.calc-number-input:focus {
 
 .mobile-calc-cta-card {
   display: none;
-  background-color: var(--color-bg-light);
+  background-color: #ffffff;
   color: var(--color-text-dark);
-  border-radius: 12px;
-  padding: 1.65rem 1.25rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  padding: 1.75rem 1.35rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06), 0 2px 8px rgba(37, 99, 235, 0.04);
+  border: 1px solid #e2e8f0;
   border-top: 4px solid var(--color-accent);
   margin-top: 1rem;
 }
@@ -3984,7 +3985,12 @@ textarea.calc-number-input:focus {
   width: 100vw;
   height: 100vh;
   z-index: 999999;
-  background-color: #04140e;
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(rgba(248, 250, 252, 0.78), rgba(248, 250, 252, 0.78)),
+    url("/financial_infographics_watermark.jpg");
+  background-repeat: repeat;
+  background-size: 450px 450px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -3997,7 +4003,7 @@ textarea.calc-number-input:focus {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #04140e;
+  background-color: transparent;
   padding: 1rem 0.85rem;
   box-sizing: border-box;
 }
@@ -4006,20 +4012,20 @@ textarea.calc-number-input:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 0.25rem 1.25rem 0.25rem;
-  border-bottom: 1px solid rgba(158, 112, 71, 0.25);
+  padding: 0.75rem 0.5rem 1.25rem 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
   margin-bottom: 1rem;
 }
 
 .mobile-calc-back-btn {
-  background: rgba(158, 112, 71, 0.15);
-  border: 1px solid var(--color-accent);
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.25);
   color: var(--color-accent);
-  padding: 0.55rem 1.1rem;
-  border-radius: 20px;
+  padding: 0.55rem 1.2rem;
+  border-radius: 30px;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -4029,16 +4035,17 @@ textarea.calc-number-input:focus {
 
 .mobile-calc-back-btn:hover {
   background: var(--color-accent);
-  color: #04140e;
+  color: #ffffff;
 }
 
 .mobile-fullscreen-card {
   margin-right: 0 !important;
   margin-top: 0 !important;
-  background-color: var(--color-bg-light) !important;
-  border-radius: 12px !important;
-  padding: 1.4rem 1rem !important;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  padding: 1.5rem 1.1rem !important;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(37, 99, 235, 0.05) !important;
 }
 
 /* ==========================================================================
