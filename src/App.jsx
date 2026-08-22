@@ -10,6 +10,24 @@ import {
   Menu
 } from 'lucide-react';
 import './App.css';
+import { 
+  animateHero, 
+  animateExecutiveHero, 
+  animateCalculators, 
+  animateTrustedNetwork, 
+  animateLegacyTimeline, 
+  animateLeadership, 
+  animateStudio, 
+  animateMFLanding, 
+  animateFundSelector, 
+  animateBaskets, 
+  animateInsuranceLanding, 
+  animateDownloads, 
+  animateContact, 
+  animateFinalCTA, 
+  executePageWipe, 
+  cleanupScrollTriggers 
+} from './utils/animations';
 
 // ----------------------------------------------------
 // Formatting Helper Functions (Indian Numbering System)
@@ -102,7 +120,7 @@ function FloatingSocialDock() {
         title="Follow us on Facebook"
         aria-label="Facebook"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
         </svg>
       </a>
@@ -116,7 +134,7 @@ function FloatingSocialDock() {
         title="Connect on LinkedIn"
         aria-label="LinkedIn"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
           <rect x="2" y="9" width="4" height="12" />
           <circle cx="4" cy="4" r="2" />
@@ -132,7 +150,7 @@ function FloatingSocialDock() {
         title="Follow us on Instagram"
         aria-label="Instagram"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -146,10 +164,61 @@ function App() {
   // Navigation & Menu States
   const [currentPage, setCurrentPage] = useState('home'); // home | about | mutual_funds | corporate_fd | insurance | taxation | downloads
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mfSubPage, setMfSubPage] = useState('landing'); // 'landing', 'selector', 'baskets'
+  const [insuranceSubPage, setInsuranceSubPage] = useState('landing'); // 'landing', 'life', 'health', 'general'
 
+  // Page Wipe & Smooth Route Navigation Handler
+  const navigatePage = (targetPage, targetSubPage = 'landing') => {
+    if (targetPage === currentPage && targetSubPage === (targetPage === 'mutual_funds' ? mfSubPage : insuranceSubPage)) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    executePageWipe(() => {
+      setCurrentPage(targetPage);
+      if (targetPage === 'mutual_funds') setMfSubPage(targetSubPage);
+      if (targetPage === 'insurance') setInsuranceSubPage(targetSubPage);
+      setMobileMenuOpen(false);
+    });
+  };
+
+  // Section GSAP + ScrollTrigger Motion Engine Trigger
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentPage]);
+    cleanupScrollTriggers();
+
+    const timer = setTimeout(() => {
+      if (currentPage === 'home') {
+        animateHero();
+        animateExecutiveHero();
+        animateCalculators();
+        animateTrustedNetwork();
+        animateFinalCTA();
+      } else if (currentPage === 'about') {
+        animateLegacyTimeline();
+        animateLeadership();
+        animateStudio();
+        animateFinalCTA();
+      } else if (currentPage === 'mutual_funds') {
+        if (mfSubPage === 'landing') animateMFLanding();
+        else if (mfSubPage === 'selector') animateFundSelector();
+        else if (mfSubPage === 'baskets') animateBaskets();
+        animateFinalCTA();
+      } else if (currentPage === 'insurance') {
+        if (insuranceSubPage === 'landing') animateInsuranceLanding();
+        animateFinalCTA();
+      } else if (currentPage === 'downloads') {
+        animateDownloads();
+        animateFinalCTA();
+      } else if (currentPage === 'contact') {
+        animateContact();
+        animateFinalCTA();
+      }
+    }, 120);
+
+    return () => {
+      clearTimeout(timer);
+      cleanupScrollTriggers();
+    };
+  }, [currentPage, mfSubPage, insuranceSubPage]);
 
   // Modal states
   const [showScheduleModal, setShowScheduleModal] = useState(false);
@@ -175,13 +244,11 @@ function App() {
   const [insDependents, setInsDependents] = useState(3);
   const [insLiquidAssets, setInsLiquidAssets] = useState(500000);
   const [insWorkingYears, setInsWorkingYears] = useState(25);
-  const [insuranceSubPage, setInsuranceSubPage] = useState('landing'); // 'landing', 'life', 'health', 'general'
   const [healthAge, setHealthAge] = useState(35);
   const [healthCoverAmount, setHealthCoverAmount] = useState(1000000);
   const [healthMembers, setHealthMembers] = useState('family'); // 'self', 'couple', 'family', 'parents'
   const [vehicleValue, setVehicleValue] = useState(800000);
   const [vehicleAge, setVehicleAge] = useState(3);
-  const [mfSubPage, setMfSubPage] = useState('landing'); // 'landing', 'selector', 'baskets'
   const [amcSearch, setAmcSearch] = useState('');
   const [amcRatingFilter, setAmcRatingFilter] = useState('All');
 
@@ -277,45 +344,6 @@ function App() {
     { id: 'redemption', title: 'Common MF Redemption Slip', desc: 'Physical redemption transaction order slip for offline folios.', size: '320 KB' }
   ];
 
-  // Mutual Fund Baskets
-  const mfBaskets = [
-    {
-      id: 'conservative',
-      name: 'Conservative Growth',
-      desc: 'Lower volatility. Structured primarily with high-yield debt funds and blue-chip large-caps.',
-      returns: '9.8%',
-      risk: 'Low to Moderate',
-      allocation: '60% Debt Funds, 30% Large Cap, 10% Gold',
-      funds: ['SBI Debt Fund', 'HDFC Large Cap Fund']
-    },
-    {
-      id: 'balanced',
-      name: 'Balanced Wealth',
-      desc: 'Moderate risk hybrid fund profile seeking optimized returns over a 3-5 year lifespan.',
-      returns: '13.2%',
-      risk: 'Moderate',
-      allocation: '50% Equity Funds, 35% Debt Funds, 15% Hybrid',
-      funds: ['ICICI balanced Advantage Fund', 'Tata Hybrid Growth Fund']
-    },
-    {
-      id: 'growth',
-      name: 'High Growth Equity',
-      desc: 'Aggressive equity blend maximizing returns through active mid-cap and small-cap assets.',
-      returns: '16.5%',
-      risk: 'High',
-      allocation: '40% Large Cap, 35% Mid Cap, 25% Small Cap Equity',
-      funds: ['Nippon India Growth Fund', 'HDFC Small Cap Fund', 'Axis Midcap']
-    },
-    {
-      id: 'tax_saver',
-      name: 'Tax Saver Basket (ELSS)',
-      desc: 'Dedicated equity saving scheme offering dual benefit of tax deduction and wealth compounding.',
-      returns: '14.5%',
-      risk: 'Moderately High',
-      allocation: '100% Tax Saving ELSS Mutual Funds (3Y Lock-in)',
-      funds: ['SBI Long Term Equity (ELSS)', 'ICICI Pru ELSS Tax Saver']
-    }
-  ];
 
   // ----------------------------------------------------
   // CALCULATIONS (MEMOIZED)
@@ -494,12 +522,7 @@ function App() {
     setShowInvestModal(true);
   };
 
-  const triggerBasketInvest = (basketName) => {
-    setInvestPartner(basketName.toUpperCase() + ' PORTFOLIO');
-    setInvestType('SIP');
-    setInvestAmount(10000);
-    setShowInvestModal(true);
-  };
+
 
 
   const handleDownloadTrigger = (fileId) => {
@@ -693,6 +716,7 @@ function LuxuryPreloader() {
   });
 
   const [loadingState, setLoadingState] = useState(() => hasSeen ? 'hidden' : 'active'); // 'active' -> 'fading' -> 'hidden'
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (hasSeen) return;
@@ -702,6 +726,17 @@ function LuxuryPreloader() {
     } catch (e) {
       console.error(e);
     }
+
+    // Counter animation 0% -> 100%
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + 2;
+      });
+    }, 35);
 
     // Phase 1: At 2.2s start fade out & scale
     const fadeTimer = setTimeout(() => {
@@ -714,6 +749,7 @@ function LuxuryPreloader() {
     }, 2800);
 
     return () => {
+      clearInterval(interval);
       clearTimeout(fadeTimer);
       clearTimeout(hideTimer);
     };
@@ -724,26 +760,29 @@ function LuxuryPreloader() {
   return (
     <div className={`luxury-preloader-overlay ${loadingState === 'fading' ? 'preloader-fade-out' : ''}`}>
       <div className="preloader-content">
-        {/* Gold Logo SVG Stroke Animation */}
+        {/* Royal Sapphire Blue Logo SVG Stroke Animation */}
         <div className="preloader-logo-wrapper">
-          <svg className="preloader-svg-logo" viewBox="0 0 120 120" width="100" height="100">
+          <svg className="preloader-svg-logo" viewBox="0 0 120 120" width="120" height="120">
             <circle className="stroke-circle-outer" cx="60" cy="60" r="56" />
             <circle className="stroke-circle-inner" cx="60" cy="60" r="48" />
             <circle className="stroke-circle-dash" cx="60" cy="60" r="44" />
-            <text className="logo-text-est" x="60" y="46" textAnchor="middle">EST .</text>
-            <text className="logo-text-year" x="60" y="78" textAnchor="middle">1992</text>
+            <text className="logo-text-est" x="60" y="45" textAnchor="middle">EST .</text>
+            <text className="logo-text-year" x="60" y="77" textAnchor="middle">1992</text>
           </svg>
         </div>
 
-        {/* Brand Text Fade In */}
+        {/* Brand Text */}
         <div className="preloader-text-group">
           <h1 className="preloader-brand-title">GIRI INVESTMENT</h1>
-          <p className="preloader-brand-sub">Building Wealth Since 1992</p>
+          <p className="preloader-brand-sub">PEAKS OF TRUST, SINCE 1992</p>
         </div>
 
-        {/* Gold Loading Line */}
-        <div className="preloader-line-track">
-          <div className="preloader-line-fill"></div>
+        {/* Sapphire Loading Line & Percentage Counter */}
+        <div className="preloader-progress-box">
+          <div className="preloader-line-track">
+            <div className="preloader-line-fill" style={{ width: `${progress}%` }}></div>
+          </div>
+          <div className="preloader-counter">{progress}%</div>
         </div>
       </div>
     </div>
@@ -751,8 +790,7 @@ function LuxuryPreloader() {
 }
 
   const handleLogoClick = () => {
-    setCurrentPage('home');
-    setMobileMenuOpen(false);
+    navigatePage('home');
   };
 
   return (
@@ -760,37 +798,40 @@ function LuxuryPreloader() {
       <LuxuryPreloader />
       <CustomCursor />
       <FloatingSocialDock />
+      <div className="page-wipe-overlay"></div>
       {/* ----------------------------------------------------
           NAVBAR & HEADER
          ---------------------------------------------------- */}
       <header className="main-header">
-        <div className="header-inner">
-          <div className="brand-seal-container" onClick={handleLogoClick}>
-            <div className="brand-seal">
-              <div className="brand-seal-inner">
-                <span className="brand-seal-est">Est.</span>
-                <span className="brand-seal-year">1992</span>
+        <div className={`header-inner ${mobileMenuOpen ? 'menu-is-open' : ''}`}>
+          <div className="header-top-row">
+            <div className="brand-seal-container" onClick={handleLogoClick}>
+              <div className="brand-seal">
+                <div className="brand-seal-inner">
+                  <span className="brand-seal-est">Est.</span>
+                  <span className="brand-seal-year">1992</span>
+                </div>
+              </div>
+              <div className="brand-text-block">
+                <h1 className="brand-title" style={{ margin: 0, lineHeight: 1.15 }}>GIRI INVESTMENT</h1>
+                <span className="brand-tagline">Peaks of trust, since 1992</span>
               </div>
             </div>
-            <div>
-              <h1 className="brand-title" style={{ margin: 0, lineHeight: 1.15 }}>GIRI INVESTMENT</h1>
-              <span className="brand-tagline">Peaks of trust, since 1992</span>
-            </div>
-          </div>
 
-          <button 
-            className="menu-toggle" 
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle Menu"
-          >
-            <Menu size={24} />
-          </button>
+            <button 
+              className="menu-toggle" 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle Menu"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
 
           <ul className={`nav-menu ${mobileMenuOpen ? 'open' : ''}`}>
             <li>
               <span 
                 className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
-                onClick={() => { setCurrentPage('home'); setMobileMenuOpen(false); }}
+                onClick={() => navigatePage('home')}
               >
                 Home
               </span>
@@ -798,7 +839,7 @@ function LuxuryPreloader() {
             <li>
               <span 
                 className={`nav-link ${currentPage === 'about' ? 'active' : ''}`}
-                onClick={() => { setCurrentPage('about'); setMobileMenuOpen(false); }}
+                onClick={() => navigatePage('about')}
               >
                 About Us
               </span>
@@ -806,7 +847,7 @@ function LuxuryPreloader() {
             <li>
               <span 
                 className={`nav-link ${currentPage === 'mutual_funds' ? 'active' : ''}`}
-                onClick={() => { setCurrentPage('mutual_funds'); setMobileMenuOpen(false); }}
+                onClick={() => navigatePage('mutual_funds')}
               >
                 Mutual Funds
               </span>
@@ -814,7 +855,7 @@ function LuxuryPreloader() {
             <li>
               <span 
                 className={`nav-link ${currentPage === 'insurance' ? 'active' : ''}`}
-                onClick={() => { setCurrentPage('insurance'); setInsuranceSubPage('landing'); setMobileMenuOpen(false); }}
+                onClick={() => navigatePage('insurance', 'landing')}
               >
                 Insurance
               </span>
@@ -822,10 +863,19 @@ function LuxuryPreloader() {
             <li>
               <span 
                 className={`nav-link ${currentPage === 'downloads' ? 'active' : ''}`}
-                onClick={() => { setCurrentPage('downloads'); setMobileMenuOpen(false); }}
+                onClick={() => navigatePage('downloads')}
               >
                 Downloads
               </span>
+            </li>
+            <li className="mobile-only-action">
+              <button 
+                className="nav-start-investing-btn" 
+                style={{ width: '100%', justifyContent: 'center', marginTop: '0.5rem' }}
+                onClick={() => { setShowInvestModal(true); setMobileMenuOpen(false); }}
+              >
+                Start investing
+              </button>
             </li>
           </ul>
 
@@ -848,18 +898,18 @@ function LuxuryPreloader() {
         {/* VIEW 1: HOME PAGE */}
         {currentPage === 'home' && (
           <>
-            <section className="section">
+            <section className="section hero-section-wrapper">
               <div className="container grid-2">
                 <div>
-                  <div className="section-tag">A third-generation ledger, still being written</div>
+                  <div className="section-tag hero-caption-tag">A third-generation ledger, still being written</div>
                   <h2 className="title-serif-large">
-                    Smart investments,<br />
-                    <span className="italic-gold">secure</span> futures.
+                    <span className="hero-title-line">Smart investments,</span><br />
+                    <span className="hero-title-line"><span className="italic-gold">secure</span> futures.</span>
                   </h2>
-                  <p className="subtext">
+                  <p className="subtext hero-subtext-para">
                     Every rupee you invest is entered, tracked and reconciled — the way it's been done here since 1992. No jargon, no guesswork, just a plan you can read like a passbook.
                   </p>
-                  <div className="btn-group">
+                  <div className="btn-group hero-btn-group">
                     <button className="btn btn-primary" onClick={() => setShowInvestModal(true)}>
                       Start Investing <ArrowRight size={16} />
                     </button>
@@ -870,47 +920,58 @@ function LuxuryPreloader() {
                 </div>
 
                 <div>
-                  <div className="ledger-sheet ledger-sheet-tilted">
-                    <div className="verified-stamp">
-                      <div style={{ fontSize: '7px', letterSpacing: '1px' }}>EST. 1992</div>
-                      VERIFIED
-                      <div style={{ fontSize: '6px', letterSpacing: '0.5px' }}>SSG LEDGER RECONCILED</div>
-                    </div>
+                  <div className="ledger-sheet ledger-sheet-tilted founder-testimonial-card">
+                    
+                    {/* Top Header Row with Verified Stamp */}
+                    <div className="founder-card-top-row">
+                      <div className="founder-profile-header">
+                        <img 
+                          src="/shambhu_giri.jpg" 
+                          alt="Shambhu Sharan Giri" 
+                          className="founder-avatar"
+                        />
+                        <div className="founder-title-info">
+                          <span className="caption-label dark founder-role-badge">FOUNDER & CHIEF ADVISOR</span>
+                          <h3 className="founder-card-name">Shambhu Sharan Giri</h3>
+                          <div className="founder-card-arn">AMFI ARN-7519 • EST. 1992</div>
+                        </div>
+                      </div>
 
-                    <span className="caption-label dark">Portfolio Value</span>
-                    <div className="portfolio-value-amt">₹18.2L</div>
-                    <div className="portfolio-value-trend">
-                      +₹3.8L (+26.5%) since start
+                      <div className="verified-stamp founder-verified-stamp">
+                        <div style={{ fontSize: '7px', letterSpacing: '1px' }}>EST. 1992</div>
+                        VERIFIED
+                        <div style={{ fontSize: '6px', letterSpacing: '0.5px' }}>SSG ADVISORY GUARANTEE</div>
+                      </div>
                     </div>
 
                     <div className="portfolio-divider"></div>
-                    <span className="caption-label dark">Portfolio Growth</span>
-                    
-                    <div className="sparkline-container" style={{ height: '70px', marginTop: '0.5rem', marginBottom: '1rem' }}>
-                      <svg className="sparkline-svg" viewBox="0 0 300 70">
-                        <path 
-                          className="sparkline-path" 
-                          d="M 10 55 Q 50 53 90 58 T 170 42 T 250 25 T 290 28" 
-                          style={{ stroke: 'var(--color-success)', strokeWidth: '2.5' }} 
-                        />
-                        <circle cx="290" cy="28" r="3" fill="var(--color-success)" />
-                      </svg>
+
+                    {/* Founder Quote */}
+                    <div className="founder-quote-box">
+                      <span className="founder-quote-mark">“</span>
+                      <p className="founder-quote-text">
+                        "Wealth is not built by chasing market noise, but through patient, disciplined planning and unshakeable trust built over three decades."
+                      </p>
                     </div>
 
-                    <div className="portfolio-details">
+                    <div className="portfolio-divider"></div>
+
+                    {/* Executive Stats Row */}
+                    <div className="portfolio-details founder-stats-details">
                       <div className="portfolio-row">
-                        <span className="portfolio-row-label">Retirement Goal Target</span>
-                        <span className="portfolio-row-val">₹25L</span>
+                        <span className="portfolio-row-label">Family Portfolios</span>
+                        <span className="portfolio-row-val accent-val">1,200+ Families</span>
                       </div>
                       <div className="portfolio-row">
-                        <span className="portfolio-row-label">SIP Growth</span>
-                        <span className="portfolio-row-val trend-up">▲ 14.20%</span>
+                        <span className="portfolio-row-label">Track Record</span>
+                        <span className="portfolio-row-val trend-up">▲ 30+ Years Trust</span>
                       </div>
                       <div className="portfolio-row">
-                        <span className="portfolio-row-label">Investment Started</span>
-                        <span className="portfolio-row-val">Apr 2023</span>
+                        <span className="portfolio-row-label">Advisory Guarantee</span>
+                        <span className="portfolio-row-val success-val">100% Reconciled</span>
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -964,7 +1025,9 @@ function LuxuryPreloader() {
             </section>
 
             <section id="calc-panel-header" className="section">
-              <div className="container grid-2">
+              <div className="container">
+                <div className="calc-assembly-line"></div>
+                <div className="grid-2 calc-section-grid">
                 <div>
                   <div className="section-tag">Financial Planning Tools</div>
                   <h2 className="title-serif-large">
@@ -1214,9 +1277,10 @@ function LuxuryPreloader() {
 
                 </div>
               </div>
-            </section>
+            </div>
+          </section>
 
-            <section className="section">
+            <section className="section trusted-network-section">
               <div className="container" style={{ textAlign: 'center' }}>
                 <div className="section-tag" style={{ justifyContent: 'center', marginBottom: '1rem' }}>— TRUSTED NETWORK —</div>
                 <h2 className="title-serif-large" style={{ fontSize: '2.8rem', margin: '0.75rem 0' }}>
@@ -1416,14 +1480,6 @@ function LuxuryPreloader() {
                       <span className="mf-landing-subtitle">Growth & Pension Planners</span>
                     </div>
                   </div>
-
-                  <div className="mf-landing-card" onClick={() => setMfSubPage('baskets')}>
-                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/india_life_insurance.jpg")' }}></div>
-                    <div className="mf-landing-card-overlay">
-                      <h3 className="mf-landing-title">Readymade Basket</h3>
-                      <span className="mf-landing-subtitle">Pre-curated Baskets</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             )}
@@ -1553,59 +1609,6 @@ function LuxuryPreloader() {
                 </div>
               </div>
             )}
-
-            {/* SUB-PAGE 3: READYMADE BASKETS */}
-            {mfSubPage === 'baskets' && (
-              <div className="container" style={{ textAlign: 'center' }}>
-                <div className="back-btn-container">
-                  <button className="btn btn-outline" style={{ padding: '0.5rem 1.2rem', fontSize: '0.75rem' }} onClick={() => setMfSubPage('landing')}>
-                    ← Back to Mutual Fund Options
-                  </button>
-                </div>
-
-                <div style={{ marginBottom: '3rem' }}>
-                  <div className="section-tag" style={{ justifyContent: 'center' }}>Pre-curated Baskets</div>
-                  <h2 className="title-serif-large" style={{ fontSize: '2.8rem', margin: '0.5rem 0' }}>Readymade Wealth Baskets</h2>
-                  <p className="subtext" style={{ margin: '0 auto' }}>
-                    Ready-to-deploy fund portfolios built around target risks and multi-year time-horizons.
-                  </p>
-                </div>
-
-                <div className="basket-grid">
-                  {mfBaskets.map((basket) => (
-                    <div key={basket.id} className="basket-card">
-                      <div>
-                        <span className="basket-badge">{basket.risk} Risk</span>
-                        <h3 className="basket-title">{basket.name}</h3>
-                        <p className="about-history-text" style={{ fontSize: '0.85rem', marginBottom: '1.5rem' }}>{basket.desc}</p>
-                        
-                        <div className="basket-stats">
-                          <div className="basket-stat-item">
-                            <span className="caption-label dark" style={{ fontSize: '0.6rem' }}>Target Yield</span>
-                            <div className="basket-stat-num" style={{ color: 'var(--color-success)' }}>~{basket.returns}</div>
-                          </div>
-                          <div className="basket-stat-item" style={{ textAlign: 'right' }}>
-                            <span className="caption-label dark" style={{ fontSize: '0.6rem' }}>Allocation</span>
-                            <div className="basket-stat-num" style={{ fontSize: '0.8rem', marginTop: '0.2rem' }}>{basket.allocation}</div>
-                          </div>
-                        </div>
-
-                        <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
-                          <span className="caption-label dark" style={{ fontSize: '0.65rem' }}>Included Funds</span>
-                          <ul className="basket-funds-list" style={{ marginTop: '0.5rem' }}>
-                            {basket.funds.map((f, i) => <li key={i}>{f}</li>)}
-                          </ul>
-                        </div>
-                      </div>
-
-                      <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => triggerBasketInvest(basket.name)}>
-                        Invest in Basket
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </section>
         )}
 
@@ -1621,7 +1624,7 @@ function LuxuryPreloader() {
                   Insurance is a means of protection from financial loss. It is a form of risk management primarily used to hedge against the risk of a contingent, uncertain loss. The amount of money to be charged for a certain amount of insurance coverage is called the premium.
                 </p>
 
-                <div className="mf-landing-grid">
+                <div className="mf-landing-grid insurance-landing-grid">
                   <div className="mf-landing-card" onClick={() => { setInsuranceSubPage('life'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
                     <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/india_life_insurance.jpg")' }}></div>
                     <div className="mf-landing-card-overlay">
@@ -2489,6 +2492,24 @@ function LuxuryPreloader() {
          ---------------------------------------------------- */}
       <footer className="footer-luxury">
         <div className="container">
+          {/* Section 15: Mountain Peak Drawing Animation */}
+          <div className="footer-mountain-container" style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <svg className="footer-mountain-svg" viewBox="0 0 400 60" style={{ maxWidth: '320px', height: '55px', margin: '0 auto' }}>
+              <path 
+                className="footer-mountain-path" 
+                d="M 10 50 L 170 50 L 200 10 L 230 50 L 390 50" 
+                fill="none" 
+                stroke="var(--color-accent)" 
+                strokeWidth="3" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+              />
+            </svg>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', fontWeight: '700', color: 'var(--color-accent)', letterSpacing: '2.5px', marginTop: '0.5rem' }}>
+              GIRI INVESTMENT — PEAKS OF TRUST, SINCE 1992
+            </div>
+          </div>
+
           <div className="footer-grid-4">
             
             {/* Column 1: Get In Touch */}
