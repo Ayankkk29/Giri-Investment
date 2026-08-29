@@ -160,6 +160,54 @@ function FloatingSocialDock() {
   );
 }
 
+// ----------------------------------------------------
+// Live NSE / BSE Market Ticker Tape Component
+// ----------------------------------------------------
+function MarketTickerTape() {
+  const tickerItems = [
+    { name: 'Nifty 50', val: '₹24,318.50', change: '+0.71%', up: true, link: 'https://www.nseindia.com/' },
+    { name: 'Sensex', val: '79,842.10', change: '+0.65%', up: true, link: 'https://www.bseindia.com/' },
+    { name: 'Nifty Bank', val: '₹52,140.20', change: '+0.45%', up: true, link: 'https://www.nseindia.com/market-data/live-equity-market' },
+    { name: 'Nifty Midcap 100', val: '₹58,420.15', change: '+0.82%', up: true, link: 'https://www.nseindia.com/' },
+    { name: 'SBI Small Cap NAV', val: '₹168.42', change: '+1.12%', up: true, link: 'https://www.nseindia.com/' },
+    { name: 'Nippon Small Cap NAV', val: '₹154.20', change: '+1.35%', up: true, link: 'https://www.nseindia.com/' },
+    { name: 'ICICI Balanced NAV', val: '₹62.19', change: '+0.31%', up: true, link: 'https://www.nseindia.com/' },
+    { name: 'Kaveri Corp Bond NAV', val: '₹27.85', change: '-0.04%', up: false, link: 'https://www.nseindia.com/' },
+    { name: 'Sundaram Eq Savings NAV', val: '₹58.03', change: '+0.62%', up: true, link: 'https://www.nseindia.com/' },
+    { name: 'HDFC Top 100 NAV', val: '₹988.50', change: '+0.55%', up: true, link: 'https://www.nseindia.com/' },
+    { name: 'Gold 24K (10g)', val: '₹74,250', change: '+0.25%', up: true, link: 'https://www.bseindia.com/' },
+  ];
+
+  return (
+    <div className="market-ticker-wrapper">
+      <div className="market-ticker-live-badge">
+        <span className="ticker-pulse-dot"></span>
+        NSE / BSE LIVE
+      </div>
+      <div className="market-ticker-scroll-track">
+        <div className="market-ticker-content">
+          {[...tickerItems, ...tickerItems].map((item, idx) => (
+            <a 
+              key={idx} 
+              href={item.link} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="market-ticker-item"
+              title={`View ${item.name} live on ${item.link.includes('bseindia') ? 'BSE' : 'NSE'}`}
+            >
+              <span className="ticker-item-name">{item.name}</span>
+              <span className="ticker-item-val">{item.val}</span>
+              <span className={`ticker-item-change ${item.up ? 'up' : 'down'}`}>
+                {item.change}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   // Navigation & Menu States
   const [currentPage, setCurrentPage] = useState('home'); // home | about | mutual_funds | corporate_fd | insurance | taxation | downloads
@@ -307,18 +355,18 @@ function App() {
 
   // Partners data
   const partners = [
-    { code: 'SBI', name: 'SBI Mutual Fund', type: 'AMC', categoryTag: 'LARGE CAP', est: '1987', aum: '₹9.1L Cr', rating: '5★', avgReturn: '15.4%' },
-    { code: 'IP', name: 'ICICI Prudential MF', type: 'AMC', categoryTag: 'MULTI CAP', est: '1993', aum: '₹7.5L Cr', rating: '5★', avgReturn: '14.8%' },
-    { code: 'NI', name: 'Nippon India MF', type: 'AMC', categoryTag: 'FLEXI CAP', est: '1995', aum: '₹4.3L Cr', rating: '4★', avgReturn: '14.2%' },
-    { code: 'TA', name: 'Tata Mutual Fund', type: 'AMC', categoryTag: 'HYBRID', est: '1994', aum: '₹1.5L Cr', rating: '4★', avgReturn: '13.9%' },
-    { code: 'AX', name: 'Axis Mutual Fund', type: 'AMC', categoryTag: 'SMALL CAP', est: '2009', aum: '₹2.6L Cr', rating: '4★', avgReturn: '14.1%' },
-    { code: 'DSP', name: 'DSP Mutual Fund', type: 'AMC', categoryTag: 'MID CAP', est: '1996', aum: '₹1.4L Cr', rating: '4★', avgReturn: '13.8%' },
-    { code: 'HD', name: 'HDFC Mutual Fund', type: 'AMC', categoryTag: 'LARGE CAP', est: '1999', aum: '₹6.2L Cr', rating: '5★', avgReturn: '15.1%' },
-    { code: 'MO', name: 'Motilal Oswal MF', type: 'AMC', categoryTag: 'FLEXI CAP', est: '2008', aum: '₹0.5L Cr', rating: '4★', avgReturn: '16.2%' },
-    { code: 'SU', name: 'Sundaram Mutual Fund', type: 'AMC', categoryTag: 'MID CAP', est: '1996', aum: '₹0.6L Cr', rating: '4★', avgReturn: '13.5%' },
-    { code: 'LIC', name: 'LIC Mutual Fund', type: 'AMC', categoryTag: 'LARGE CAP', est: '1989', aum: '₹0.3L Cr', rating: '3★', avgReturn: '12.8%' },
-    { code: 'KO', name: 'Kotak Mutual Fund', type: 'AMC', categoryTag: 'MULTI CAP', est: '1998', aum: '₹3.8L Cr', rating: '4★', avgReturn: '14.5%' },
-    { code: 'FR', name: 'Franklin Templeton', type: 'AMC', categoryTag: 'HYBRID', est: '1995', aum: '₹0.8L Cr', rating: '4★', avgReturn: '13.7%' },
+    { code: 'SBI', name: 'SBI Mutual Fund', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '1987', aum: '₹9.1L Cr', rating: '5★', avgReturn: '15.4%' },
+    { code: 'IP', name: 'ICICI Prudential MF', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '1993', aum: '₹7.5L Cr', rating: '5★', avgReturn: '14.8%' },
+    { code: 'NI', name: 'Nippon India Small Cap Fund', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '1995', aum: '₹4.3L Cr', rating: '5★', avgReturn: '24.8%' },
+    { code: 'TA', name: 'Tata Mutual Fund', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '1994', aum: '₹1.5L Cr', rating: '4★', avgReturn: '13.9%' },
+    { code: 'AX', name: 'Axis Mutual Fund', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '2009', aum: '₹2.6L Cr', rating: '4★', avgReturn: '14.1%' },
+    { code: 'DSP', name: 'DSP Mutual Fund', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '1996', aum: '₹1.4L Cr', rating: '4★', avgReturn: '13.8%' },
+    { code: 'HD', name: 'HDFC Mutual Fund', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '1999', aum: '₹6.2L Cr', rating: '5★', avgReturn: '15.1%' },
+    { code: 'MO', name: 'Motilal Oswal MF', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '2008', aum: '₹0.5L Cr', rating: '4★', avgReturn: '16.2%' },
+    { code: 'SU', name: 'Sundaram Mutual Fund', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '1996', aum: '₹0.6L Cr', rating: '4★', avgReturn: '13.5%' },
+    { code: 'LIC', name: 'LIC Mutual Fund', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '1989', aum: '₹0.3L Cr', rating: '3★', avgReturn: '12.8%' },
+    { code: 'KO', name: 'Kotak Mutual Fund', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '1998', aum: '₹3.8L Cr', rating: '4★', avgReturn: '14.5%' },
+    { code: 'FR', name: 'Franklin Templeton', type: 'AMC', categoryTag: 'MUTUAL FUND', est: '1995', aum: '₹0.8L Cr', rating: '4★', avgReturn: '13.7%' },
     
     { code: 'LIC', name: 'LIC of India', type: 'Insurance', categoryTag: 'LIFE COVER', est: '1956', solvency: '1.85', rating: '5★', claimRatio: '98.6%' },
     { code: 'ML', name: 'Max Life Insurance', type: 'Insurance', categoryTag: 'LIFE COVER', est: '2000', solvency: '1.92', rating: '5★', claimRatio: '99.4%' },
@@ -327,8 +375,8 @@ function App() {
     { code: 'IP', name: 'ICICI Prudential Life', type: 'Insurance', categoryTag: 'TERM COVER', est: '2001', solvency: '2.02', rating: '5★', claimRatio: '98.2%' },
     { code: 'TA', name: 'Tata AIA Life', type: 'Insurance', categoryTag: 'TERM COVER', est: '2001', solvency: '1.88', rating: '5★', claimRatio: '99.0%' },
     { code: 'SH', name: 'Star Health Insurance', type: 'Insurance', categoryTag: 'HEALTH MEDICLAIM', est: '2006', solvency: '1.70', rating: '4★', claimRatio: '99.0%' },
-    { code: 'CH', name: 'Care Health Insurance', type: 'Insurance', categoryTag: 'HEALTH MEDICLAIM', est: '2012', solvency: '1.80', rating: '4★', claimRatio: '95.2%' },
-    { code: 'NB', name: 'Niva Bupa Health', type: 'Insurance', categoryTag: 'HEALTH MEDICLAIM', est: '2008', solvency: '1.75', rating: '4★', claimRatio: '96.5%' },
+    { code: 'CH', name: 'Care Health Insurance', type: 'Insurance', categoryTag: 'HEALTH MEDICLAIM', est: '2012', solvency: '1.80', rating: '5★', claimRatio: '95.2%' },
+    { code: 'TAIG', name: 'Tata AIG General Insurance', type: 'Insurance', categoryTag: 'MOTOR & ASSET', est: '2001', solvency: '1.95', rating: '5★', claimRatio: '98.5%' },
     { code: 'HE', name: 'HDFC ERGO General', type: 'Insurance', categoryTag: 'MOTOR & ASSET', est: '2002', solvency: '1.82', rating: '5★', claimRatio: '97.8%' },
     { code: 'IL', name: 'ICICI Lombard General', type: 'Insurance', categoryTag: 'MOTOR & ASSET', est: '2001', solvency: '2.10', rating: '5★', claimRatio: '98.2%' },
     { code: 'BA', name: 'Bajaj Allianz General', type: 'Insurance', categoryTag: 'MOTOR & ASSET', est: '2001', solvency: '2.20', rating: '5★', claimRatio: '98.0%' }
@@ -337,11 +385,32 @@ function App() {
 
   // Download files
   const downloadFiles = [
-    { id: 'kyc', title: 'KYC Application Form (Individual)', desc: 'Standard centralized KYC application form for mutual funds & stock accounts.', size: '1.2 MB' },
-    { id: 'fatca', title: 'FATCA & CRS Declaration Form', desc: 'Required taxation residency status disclosure form for individual accounts.', size: '480 KB' },
-    { id: 'bank', title: 'Change of Bank Mandate Form', desc: 'Request register change of default payout bank account.', size: '620 KB' },
-    { id: 'nominee', title: 'Nominee Declaration / Modification Form', desc: 'Add, modify, or decline nominating a folio beneficiary.', size: '890 KB' },
-    { id: 'redemption', title: 'Common MF Redemption Slip', desc: 'Physical redemption transaction order slip for offline folios.', size: '320 KB' }
+    { 
+      id: 'ckyc_kra', 
+      title: 'CKYC & KRA KYC Application Form for Individuals', 
+      desc: 'Official centralized CKYC / KRA individual investor application form for mutual funds & stock demat accounts.', 
+      size: '470 KB', 
+      format: 'PDF',
+      previewUrl: '/CKYC-KRA-KYC-FormforIndividuals.pdf',
+      downloadUrl: '/CKYC-KRA-KYC-FormforIndividuals.pdf',
+      filename: 'CKYC-KRA-KYC-FormforIndividuals.pdf'
+    },
+    { 
+      id: 'lic_forms', 
+      title: 'LIC Official Policy Claim & Service Forms', 
+      desc: 'Official Life Insurance Corporation of India (LIC) downloadable forms for policy revival, claim settlement, assignment & nomination changes.', 
+      size: 'LIC PORTAL', 
+      format: 'LIC PORTAL',
+      externalUrl: 'https://licindia.in/download-forms'
+    },
+    { 
+      id: 'amfi_forms', 
+      title: 'AMFI Distributor & Investor Various Download Forms', 
+      desc: 'Official Association of Mutual Funds in India (AMFI) various download forms for investor service requests, ARN registration & accreditation.', 
+      size: 'AMFI PORTAL', 
+      format: 'AMFI PORTAL',
+      externalUrl: 'https://www.amfiindia.com/investor/become-mf-distributor?zoneName=downloadVariousForms'
+    }
   ];
 
 
@@ -526,16 +595,32 @@ function App() {
 
 
   const handleDownloadTrigger = (fileId) => {
+    const targetFile = downloadFiles.find(f => f.id === fileId);
+    if (targetFile && targetFile.externalUrl) {
+      window.open(targetFile.externalUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
     setDownloadingFileId(fileId);
     setDownloadCompletedId(null);
     
     setTimeout(() => {
       setDownloadingFileId(null);
       setDownloadCompletedId(fileId);
+
+      if (targetFile && targetFile.downloadUrl) {
+        const link = document.createElement('a');
+        link.href = targetFile.downloadUrl;
+        link.download = targetFile.filename || targetFile.downloadUrl.split('/').pop();
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
       setTimeout(() => {
         setDownloadCompletedId(null);
       }, 5000);
-    }, 2500);
+    }, 1800);
   };
 
   const handleContactSubmit = async (e) => {
@@ -767,14 +852,14 @@ function LuxuryPreloader() {
             <circle className="stroke-circle-inner" cx="60" cy="60" r="48" />
             <circle className="stroke-circle-dash" cx="60" cy="60" r="44" />
             <text className="logo-text-est" x="60" y="45" textAnchor="middle">EST .</text>
-            <text className="logo-text-year" x="60" y="77" textAnchor="middle">1992</text>
+            <text className="logo-text-year" x="60" y="77" textAnchor="middle">1996</text>
           </svg>
         </div>
 
         {/* Brand Text */}
         <div className="preloader-text-group">
           <h1 className="preloader-brand-title">GIRI INVESTMENT</h1>
-          <p className="preloader-brand-sub">PEAKS OF TRUST, SINCE 1992</p>
+          <p className="preloader-brand-sub">PEAKS OF TRUST, SINCE 1996</p>
         </div>
 
         {/* Sapphire Loading Line & Percentage Counter */}
@@ -797,6 +882,7 @@ function LuxuryPreloader() {
     <>
       <LuxuryPreloader />
       <CustomCursor />
+      <MarketTickerTape />
       <FloatingSocialDock />
       <div className="page-wipe-overlay"></div>
       {/* ----------------------------------------------------
@@ -809,12 +895,12 @@ function LuxuryPreloader() {
               <div className="brand-seal">
                 <div className="brand-seal-inner">
                   <span className="brand-seal-est">Est.</span>
-                  <span className="brand-seal-year">1992</span>
+                  <span className="brand-seal-year">1996</span>
                 </div>
               </div>
               <div className="brand-text-block">
                 <h1 className="brand-title" style={{ margin: 0, lineHeight: 1.15 }}>GIRI INVESTMENT</h1>
-                <span className="brand-tagline">Peaks of trust, since 1992</span>
+                <span className="brand-tagline">Peaks of trust, since 1996</span>
               </div>
             </div>
 
@@ -901,13 +987,13 @@ function LuxuryPreloader() {
             <section className="section hero-section-wrapper">
               <div className="container grid-2">
                 <div>
-                  <div className="section-tag hero-caption-tag">A third-generation ledger, still being written</div>
+                  <div className="section-tag hero-caption-tag">A second-generation ledger, still being written</div>
                   <h2 className="title-serif-large">
                     <span className="hero-title-line">Smart investments,</span><br />
                     <span className="hero-title-line"><span className="italic-gold">secure</span> futures.</span>
                   </h2>
                   <p className="subtext hero-subtext-para">
-                    Every rupee you invest is entered, tracked and reconciled — the way it's been done here since 1992. No jargon, no guesswork, just a plan you can read like a passbook.
+                    Every rupee you invest is entered, tracked and reconciled — the way it's been done here since 1996. No jargon, no guesswork, just a plan you can read like a passbook.
                   </p>
                   <div className="btn-group hero-btn-group">
                     <button className="btn btn-primary" onClick={() => setShowInvestModal(true)}>
@@ -933,12 +1019,12 @@ function LuxuryPreloader() {
                         <div className="founder-title-info">
                           <span className="caption-label dark founder-role-badge">FOUNDER & CHIEF ADVISOR</span>
                           <h3 className="founder-card-name">Shambhu Sharan Giri</h3>
-                          <div className="founder-card-arn">AMFI ARN-7519 • EST. 1992</div>
+                          <div className="founder-card-arn">AMFI ARN-7519 • EST. 1996</div>
                         </div>
                       </div>
 
                       <div className="verified-stamp founder-verified-stamp">
-                        <div style={{ fontSize: '7px', letterSpacing: '1px' }}>EST. 1992</div>
+                        <div style={{ fontSize: '7px', letterSpacing: '1px' }}>EST. 1996</div>
                         VERIFIED
                         <div style={{ fontSize: '6px', letterSpacing: '0.5px' }}>SSG ADVISORY GUARANTEE</div>
                       </div>
@@ -1313,7 +1399,6 @@ function LuxuryPreloader() {
                     <div key={idx} className="partner-ledger-row" onClick={() => setSelectedPartnerInfo(partner)}>
                       <span className="partner-ledger-num">{String(idx + 1).padStart(2, '0')}</span>
                       <h3 className="partner-ledger-name">{partner.name}</h3>
-                      <span className="partner-ledger-tag">{partner.categoryTag || (partner.type === 'AMC' ? 'MUTUAL FUND' : 'INSURANCE COVER')}</span>
                     </div>
                   ))}
                 </div>
@@ -1355,9 +1440,9 @@ function LuxuryPreloader() {
             <div className="container grid-2" style={{ alignItems: 'flex-start' }}>
               <div>
                 <div className="section-tag">Our History & Legacy</div>
-                <h2 className="title-serif-large">A legacy of<br /><span className="italic-gold">trust</span> since 1992.</h2>
+                <h2 className="title-serif-large">A legacy of<br /><span className="italic-gold">trust</span> since 1996.</h2>
                 <p className="subtext" style={{ marginBottom: '2rem' }}>
-                  Established as a physical ledger accounting house, Giri Investment has evolved over three decades to navigate modern capital markets. We maintain standard transparency and personal custody of our clients' trust.
+                  Established as a physical ledger accounting house, Giri Investment has evolved over nearly three decades to navigate modern capital markets. We maintain standard transparency and personal custody of our clients' trust.
                 </p>
                 <div className="btn-group">
                   <button className="btn btn-primary" onClick={() => setShowScheduleModal(true)}>Book Folio Review</button>
@@ -1367,7 +1452,7 @@ function LuxuryPreloader() {
               <div>
                 <div className="about-history-container">
                   <div className="about-history-node">
-                    <span className="about-history-year">1992</span>
+                    <span className="about-history-year">1996</span>
                     <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', color: '#fff', marginTop: '0.25rem' }}>Ledger Founding</h4>
                     <p className="about-history-text">Founded by Shri Shambhu Sharan Giri as a localized ledger keeping firm to record family wealth balances.</p>
                   </div>
@@ -1460,7 +1545,7 @@ function LuxuryPreloader() {
 
                 <div className="mf-landing-grid">
                   <div className="mf-landing-card" onClick={() => setMfSubPage('selector')}>
-                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/india_mutual_funds.jpg")' }}></div>
+                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/fund_selector_bg.jpg")' }}></div>
                     <div className="mf-landing-card-overlay">
                       <h3 className="mf-landing-title">Fund Selector Tools</h3>
                       <span className="mf-landing-subtitle">Filter & Compare AMCs</span>
@@ -1634,7 +1719,7 @@ function LuxuryPreloader() {
                   </div>
 
                   <div className="mf-landing-card" onClick={() => { setInsuranceSubPage('general'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/india_mutual_funds.jpg")' }}></div>
+                    <div className="mf-landing-card-bg" style={{ backgroundImage: 'url("/general_insurance_bg.jpg")' }}></div>
                     <div className="mf-landing-card-overlay">
                       <h3 className="mf-landing-title">General Insurance</h3>
                       <span className="mf-landing-subtitle">Asset & Vehicle Coverage</span>
@@ -2455,7 +2540,7 @@ function LuxuryPreloader() {
                       <h3 className="download-item-title">{file.title}</h3>
                       <p className="download-item-desc">
                         <span>{file.desc}</span>
-                        <span className="download-badge-pdf">PDF ({file.size})</span>
+                        <span className="download-badge-pdf">{file.format || 'PDF'} ({file.size})</span>
                       </p>
                       
                       {downloadingFileId === file.id && (
@@ -2466,18 +2551,31 @@ function LuxuryPreloader() {
                       
                       {downloadCompletedId === file.id && (
                         <div style={{ color: 'var(--color-success)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', marginTop: '0.5rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <Check size={14} /> Downloaded successfully to your computer!
+                          <Check size={14} /> File saved to downloads folder!
                         </div>
                       )}
                     </div>
 
-                    <button 
-                      className="download-action-btn" 
-                      onClick={() => handleDownloadTrigger(file.id)}
-                      disabled={downloadingFileId !== null}
-                    >
-                      <ArrowDownToLine size={15} /> {downloadingFileId === file.id ? 'Downloading...' : 'Download'}
-                    </button>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                      {file.previewUrl && (
+                        <a 
+                          href={file.previewUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="btn btn-outline"
+                          style={{ padding: '0.5rem 0.95rem', fontSize: '0.72rem', borderRadius: '8px' }}
+                        >
+                          Preview
+                        </a>
+                      )}
+                      <button 
+                        className="download-action-btn" 
+                        onClick={() => handleDownloadTrigger(file.id)}
+                        disabled={downloadingFileId !== null}
+                      >
+                        <ArrowDownToLine size={15} /> {file.externalUrl ? 'Open Official Portal' : downloadingFileId === file.id ? 'Downloading...' : 'Download'}
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -2506,7 +2604,7 @@ function LuxuryPreloader() {
               />
             </svg>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', fontWeight: '700', color: 'var(--color-accent)', letterSpacing: '2.5px', marginTop: '0.5rem' }}>
-              GIRI INVESTMENT — PEAKS OF TRUST, SINCE 1992
+              GIRI INVESTMENT — PEAKS OF TRUST, SINCE 1996
             </div>
           </div>
 
@@ -2921,7 +3019,7 @@ function LuxuryPreloader() {
                   </div>
                   
                   <p style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', color: 'var(--color-text-muted-dark)' }}>
-                    Thank you for trusting Giri Investment since 1992.
+                    Thank you for trusting Giri Investment since 1996.
                   </p>
                 </div>
               )}
