@@ -7,7 +7,14 @@ import {
   Check, 
   Activity, 
   ArrowDownToLine,
-  Menu
+  Menu,
+  Search,
+  FileText,
+  ExternalLink,
+  ShieldCheck,
+  Globe,
+  Lock,
+  Unlock
 } from 'lucide-react';
 import './App.css';
 import { 
@@ -44,6 +51,150 @@ function formatCurrency(num) {
     return '₹' + val.toLocaleString('en-IN');
   }
 }
+
+// Download / Client Resource Documents Dataset
+const downloadFiles = [
+  // --- GIRI INVESTMENT CLIENT FORMS & INSURANCE ---
+  { 
+    id: 'lic_surrender', 
+    title: 'LIC Policy Surrender Form (Form No. 5074)', 
+    desc: 'Official LIC Form No. 5074 receipt of surrender value / discounted claim for policy discharge procedures (Jamshedpur Division).', 
+    size: '240 KB', 
+    format: 'DOC / JPG',
+    updated: 'Aug 2026',
+    category: 'Insurance',
+    sectionGroup: 'Giri Investment Forms',
+    previewUrl: '/lic_surrender_form.jpg',
+    downloadUrl: '/lic_surrender_form.jpg',
+    filename: 'LIC_Policy_Surrender_Form_5074.jpg',
+    iconType: 'pdf'
+  },
+  { 
+    id: 'lic_revival', 
+    title: 'LIC Policy Revival Form (Form No. 680)', 
+    desc: 'Official LIC Form No. 680 personal statement of health and application for revival of lapsed policy.', 
+    size: '360 KB', 
+    format: 'PDF',
+    updated: 'Aug 2026',
+    category: 'Insurance',
+    sectionGroup: 'Giri Investment Forms',
+    previewUrl: '/Revival_Form_680.pdf',
+    downloadUrl: '/Revival_Form_680.pdf',
+    filename: 'LIC_Policy_Revival_Form_680.pdf',
+    iconType: 'pdf'
+  },
+  { 
+    id: 'lic_revival_700', 
+    title: 'LIC Policy Revival Form (Form No. 700)', 
+    desc: 'Official LIC Form No. 700 personal statement of health for revival of policy on female lives & minors.', 
+    size: '3.4 MB', 
+    format: 'PDF',
+    updated: 'Aug 2026',
+    category: 'Insurance',
+    sectionGroup: 'Giri Investment Forms',
+    previewUrl: '/Revival_Form_700.pdf',
+    downloadUrl: '/Revival_Form_700.pdf',
+    filename: 'LIC_Policy_Revival_Form_700.pdf',
+    iconType: 'pdf'
+  },
+  { 
+    id: 'lic_revival_720', 
+    title: 'LIC Policy Revival Form (Form No. 720)', 
+    desc: 'Official LIC Form No. 720 medical report & statement of health for revival of high sum assured policies.', 
+    size: '2.6 MB', 
+    format: 'PDF',
+    updated: 'Aug 2026',
+    category: 'Insurance',
+    sectionGroup: 'Giri Investment Forms',
+    previewUrl: '/Revival_Form_720.pdf',
+    downloadUrl: '/Revival_Form_720.pdf',
+    filename: 'LIC_Policy_Revival_Form_720.pdf',
+    iconType: 'pdf'
+  },
+  { 
+    id: 'lic_loan', 
+    title: 'LIC Policy Loan Form (Forms 5196 / 5205 / 5200)', 
+    desc: 'Official LIC application, bond assignment & endorsement forms for loan against eligible LIC life policies.', 
+    size: '96 KB', 
+    format: 'PDF',
+    updated: 'Aug 2026',
+    category: 'Insurance',
+    sectionGroup: 'Giri Investment Forms',
+    previewUrl: '/LIC_Policy_Loan_Form_5196.pdf',
+    downloadUrl: '/LIC_Policy_Loan_Form_5196.pdf',
+    filename: 'LIC_Policy_Loan_Form_5196.pdf',
+    iconType: 'pdf'
+  },
+  { 
+    id: 'bank_mandate', 
+    title: 'NEFT / Bank Mandate Registration Form', 
+    desc: 'Official LIC NEFT mandate form for registering or updating bank account details for direct credit of claim/maturity proceeds.', 
+    size: '1.3 MB', 
+    format: 'PDF',
+    updated: 'Aug 2026',
+    category: 'Client Forms',
+    sectionGroup: 'Giri Investment Forms',
+    previewUrl: '/NEFT_MANDATE_FORM.pdf',
+    downloadUrl: '/NEFT_MANDATE_FORM.pdf',
+    filename: 'NEFT_MANDATE_FORM.pdf',
+    iconType: 'pdf'
+  },
+
+  // --- KYC & INVESTMENT FORMS ---
+  { 
+    id: 'ckyc_kra', 
+    title: 'CKYC / KRA KYC Application Form', 
+    desc: 'KYC application form used for investor onboarding and KYC-related requirements.', 
+    size: '470 KB', 
+    format: 'PDF',
+    updated: 'Aug 2026',
+    category: 'KYC',
+    sectionGroup: 'KYC & Investment Forms',
+    previewUrl: '/CKYC-KRA-KYC-FormforIndividuals.pdf',
+    downloadUrl: '/CKYC-KRA-KYC-FormforIndividuals.pdf',
+    filename: 'CKYC-KRA-KYC-FormforIndividuals.pdf',
+    iconType: 'pdf'
+  },
+  { 
+    id: 'mf_redemption', 
+    title: 'Common MF Redemption & Transaction Slip (CTF)', 
+    desc: 'Standard physical redemption, switch order, and transaction slip for mutual fund folios across AMCs.', 
+    size: '2.2 MB', 
+    format: 'PDF',
+    updated: 'Aug 2026',
+    category: 'Investment',
+    sectionGroup: 'KYC & Investment Forms',
+    previewUrl: '/CTF-Redemption.pdf',
+    downloadUrl: '/CTF-Redemption.pdf',
+    filename: 'CTF-Redemption.pdf',
+  },
+
+  // --- OFFICIAL EXTERNAL PORTALS ---
+  { 
+    id: 'lic_forms', 
+    title: 'LIC Official Portal', 
+    desc: 'LIC forms and resources for eligible policy servicing requests, online payment & policy portal.', 
+    size: 'LIC PORTAL', 
+    format: 'EXTERNAL PORTAL',
+    updated: 'Aug 2026',
+    category: 'External Portals',
+    sectionGroup: 'Official Resources',
+    externalUrl: 'https://licindia.in/download-forms',
+    iconType: 'globe'
+  },
+  { 
+    id: 'amfi_forms', 
+    title: 'AMFI Official Portal', 
+    desc: 'Official Association of Mutual Funds in India (AMFI) portal for investor forms, ARN registration & accreditation.', 
+    size: 'AMFI PORTAL', 
+    format: 'EXTERNAL PORTAL',
+    updated: 'Aug 2026',
+    category: 'External Portals',
+    sectionGroup: 'Official Resources',
+    externalUrl: 'https://www.amfiindia.com/investor/become-mf-distributor?zoneName=downloadVariousForms',
+    iconType: 'globe'
+  }
+];
 
 // ----------------------------------------------------
 // Custom Dual-Layer Lagged Gold Cursor Component
@@ -127,11 +278,11 @@ function FloatingSocialDock() {
 
       {/* LinkedIn */}
       <a 
-        href="https://www.linkedin.com/in/shambhu-sharan-giri-82946044/" 
+        href="https://www.linkedin.com/company/giri-investment/" 
         target="_blank" 
         rel="noopener noreferrer" 
         className="social-dock-btn linkedin"
-        title="Connect on LinkedIn"
+        title="Follow Giri Investment on LinkedIn"
         aria-label="LinkedIn"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -349,9 +500,20 @@ function App() {
   const [selectedPartnerInfo, setSelectedPartnerInfo] = useState(null);
   const [showAllPartners, setShowAllPartners] = useState(false);
 
-  // Downloads Simulators
+  // Client Resources Search and Filter States
+  const [isResourcesUnlocked, setIsResourcesUnlocked] = useState(() => {
+    return localStorage.getItem('giri_resources_unlocked') === 'true';
+  });
+  const [gateName, setGateName] = useState('');
+  const [gatePhone, setGatePhone] = useState('');
+  const [gateAddress, setGateAddress] = useState('');
+  const [gateEmail, setGateEmail] = useState('');
+  const [gateSubmitting, setGateSubmitting] = useState(false);
+
   const [downloadingFileId, setDownloadingFileId] = useState(null);
   const [downloadCompletedId, setDownloadCompletedId] = useState(null);
+  const [resourceSearch, setResourceSearch] = useState('');
+  const [resourceCategory, setResourceCategory] = useState('All');
 
   // Partners data
   const partners = [
@@ -382,36 +544,23 @@ function App() {
     { code: 'BA', name: 'Bajaj Allianz General', type: 'Insurance', categoryTag: 'MOTOR & ASSET', est: '2001', solvency: '2.20', rating: '5★', claimRatio: '98.0%' }
   ];
 
+  // Filtered Client Resources computed list
+  const filteredResources = useMemo(() => {
+    return downloadFiles.filter((file) => {
+      const matchesSearch = 
+        file.title.toLowerCase().includes(resourceSearch.toLowerCase()) ||
+        file.desc.toLowerCase().includes(resourceSearch.toLowerCase()) ||
+        (file.category && file.category.toLowerCase().includes(resourceSearch.toLowerCase()));
 
-  // Download files
-  const downloadFiles = [
-    { 
-      id: 'ckyc_kra', 
-      title: 'CKYC & KRA KYC Application Form for Individuals', 
-      desc: 'Official centralized CKYC / KRA individual investor application form for mutual funds & stock demat accounts.', 
-      size: '470 KB', 
-      format: 'PDF',
-      previewUrl: '/CKYC-KRA-KYC-FormforIndividuals.pdf',
-      downloadUrl: '/CKYC-KRA-KYC-FormforIndividuals.pdf',
-      filename: 'CKYC-KRA-KYC-FormforIndividuals.pdf'
-    },
-    { 
-      id: 'lic_forms', 
-      title: 'LIC Official Policy Claim & Service Forms', 
-      desc: 'Official Life Insurance Corporation of India (LIC) downloadable forms for policy revival, claim settlement, assignment & nomination changes.', 
-      size: 'LIC PORTAL', 
-      format: 'LIC PORTAL',
-      externalUrl: 'https://licindia.in/download-forms'
-    },
-    { 
-      id: 'amfi_forms', 
-      title: 'AMFI Distributor & Investor Various Download Forms', 
-      desc: 'Official Association of Mutual Funds in India (AMFI) various download forms for investor service requests, ARN registration & accreditation.', 
-      size: 'AMFI PORTAL', 
-      format: 'AMFI PORTAL',
-      externalUrl: 'https://www.amfiindia.com/investor/become-mf-distributor?zoneName=downloadVariousForms'
-    }
-  ];
+      let matchesCat = true;
+      if (resourceCategory === 'Investment') matchesCat = file.category === 'Investment' || file.sectionGroup === 'KYC & Investment Forms';
+      else if (resourceCategory === 'Insurance') matchesCat = file.category === 'Insurance';
+      else if (resourceCategory === 'KYC') matchesCat = file.category === 'KYC';
+      else if (resourceCategory === 'External Portals') matchesCat = file.sectionGroup === 'Official Resources';
+
+      return matchesSearch && matchesCat;
+    });
+  }, [resourceSearch, resourceCategory]);
 
 
   // ----------------------------------------------------
@@ -593,6 +742,37 @@ function App() {
 
 
 
+
+  const handleResourceGateSubmit = async (e) => {
+    e.preventDefault();
+    if (!gateName || !gatePhone || !gateAddress || !gateEmail) return;
+
+    setGateSubmitting(true);
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '96fe992e-4c75-41e7-8643-c33dddf5c938';
+
+    try {
+      const formData = new FormData();
+      formData.append('access_key', accessKey);
+      formData.append('name', gateName);
+      formData.append('email', gateEmail);
+      formData.append('subject', `[Client Resource Unlock Lead] ${gateName} - ${gatePhone}`);
+      formData.append('message', `New Verified Client Access Request:\n\nClient Name: ${gateName}\nPhone/WhatsApp: ${gatePhone}\nGmail/Email: ${gateEmail}\nAddress: ${gateAddress}\nRequested At: ${new Date().toLocaleString()}`);
+      formData.append('from_name', 'Giri Investment Client Portal');
+
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      });
+    } catch (err) {
+      console.warn('Web3Forms direct dispatch warning:', err);
+    } finally {
+      // Instantly unlock Client Resources page and persist verification status
+      localStorage.setItem('giri_resources_unlocked', 'true');
+      setIsResourcesUnlocked(true);
+      setGateSubmitting(false);
+    }
+  };
 
   const handleDownloadTrigger = (fileId) => {
     const targetFile = downloadFiles.find(f => f.id === fileId);
@@ -951,7 +1131,7 @@ function LuxuryPreloader() {
                 className={`nav-link ${currentPage === 'downloads' ? 'active' : ''}`}
                 onClick={() => navigatePage('downloads')}
               >
-                Downloads
+                Client Resources
               </span>
             </li>
             <li className="mobile-only-action">
@@ -2523,65 +2703,353 @@ function LuxuryPreloader() {
           </section>
         )}
 
-        {/* VIEW 7: DOWNLOADS PAGE */}
+        {/* VIEW 7: CLIENT RESOURCES PAGE */}
         {currentPage === 'downloads' && (
           <section className="section">
-            <div className="container" style={{ textAlign: 'center' }}>
-              <div className="section-tag" style={{ justifyContent: 'center', marginBottom: '1rem' }}>Folio Services</div>
-              <h2 className="title-serif-large" style={{ margin: '1rem 0 2rem 0' }}>Downloads & Documents</h2>
-              <p className="subtext" style={{ margin: '0 auto 3rem auto' }}>
-                Secure, standard AMFI forms to perform updates, KYC validations, or banking modifications in offline folios.
-              </p>
-
-              <div className="download-list">
-                {downloadFiles.map((file) => (
-                  <div key={file.id} className="download-item-card">
-                    <div className="download-item-info">
-                      <h3 className="download-item-title">{file.title}</h3>
-                      <p className="download-item-desc">
-                        <span>{file.desc}</span>
-                        <span className="download-badge-pdf">{file.format || 'PDF'} ({file.size})</span>
+            <div className="container">
+              
+              {!isResourcesUnlocked ? (
+                /* LOCKED PORTAL: CLIENT IDENTITY VERIFICATION GATEKEEPER */
+                <div className="client-gate-container">
+                  <div className="client-gate-card">
+                    <div className="gate-header">
+                      <div className="gate-lock-badge">
+                        <Lock size={28} />
+                      </div>
+                      <div className="section-tag" style={{ justifyContent: 'center', margin: '0.75rem auto 0.5rem auto' }}>
+                        Verification Required
+                      </div>
+                      <h2 className="gate-title">Client Resources Portal</h2>
+                      <p className="gate-subtitle">
+                        Client forms, legal disclosures and official documents are restricted. Please enter your contact details below to unlock instant access. Your details will be sent directly to our advisory team.
                       </p>
-                      
-                      {downloadingFileId === file.id && (
-                        <div className="download-progress-bar-container">
-                          <div className="download-progress-bar-fill"></div>
-                        </div>
-                      )}
-                      
-                      {downloadCompletedId === file.id && (
-                        <div style={{ color: 'var(--color-success)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', marginTop: '0.5rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <Check size={14} /> File saved to downloads folder!
-                        </div>
-                      )}
                     </div>
 
-                    <div className="download-actions-group">
-                      {file.previewUrl && (
-                        <a 
-                          href={file.previewUrl} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="btn btn-outline"
-                          style={{ padding: '0.5rem 0.95rem', fontSize: '0.72rem', borderRadius: '8px' }}
-                        >
-                          Preview
-                        </a>
-                      )}
+                    <form onSubmit={handleResourceGateSubmit} className="gate-form">
+                      <div className="form-group">
+                        <label className="form-label">Full Name *</label>
+                        <input 
+                          type="text" 
+                          required 
+                          placeholder="Shri Ayank Kumar Giri" 
+                          className="form-input"
+                          value={gateName}
+                          onChange={(e) => setGateName(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label className="form-label">Phone / WhatsApp Number *</label>
+                        <input 
+                          type="tel" 
+                          required 
+                          placeholder="+91 98765 43210" 
+                          className="form-input"
+                          value={gatePhone}
+                          onChange={(e) => setGatePhone(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label className="form-label">Gmail / Email Address *</label>
+                        <input 
+                          type="email" 
+                          required 
+                          placeholder="client@gmail.com" 
+                          className="form-input"
+                          value={gateEmail}
+                          onChange={(e) => setGateEmail(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label className="form-label">Residential Address *</label>
+                        <textarea 
+                          required 
+                          rows="3"
+                          placeholder="House / Flat No., Road, City, Pincode" 
+                          className="form-input"
+                          style={{ resize: 'vertical' }}
+                          value={gateAddress}
+                          onChange={(e) => setGateAddress(e.target.value)}
+                        />
+                      </div>
+
                       <button 
-                        className="download-action-btn" 
-                        onClick={() => handleDownloadTrigger(file.id)}
-                        disabled={downloadingFileId !== null}
+                        type="submit" 
+                        className="btn btn-primary gate-submit-btn"
+                        disabled={gateSubmitting}
                       >
-                        <ArrowDownToLine size={15} /> {file.externalUrl ? 'Open Official Portal' : downloadingFileId === file.id ? 'Downloading...' : 'Download'}
+                        {gateSubmitting ? (
+                          <>Dispatching Details & Unlocking...</>
+                        ) : (
+                          <>Unlock Client Resources <Lock size={16} style={{ marginLeft: '0.4rem' }} /></>
+                        )}
                       </button>
+
+                      <p className="gate-privacy-note">
+                        🔒 Your details will be transmitted securely to <strong>giriinvestments@gmail.com</strong> for portfolio reconciliation.
+                      </p>
+                    </form>
+                  </div>
+                </div>
+              ) : (
+                /* UNLOCKED PORTAL: FULL CLIENT RESOURCES ACCESS */
+                <>
+                  {/* Header Title & Subtitle */}
+                  <div style={{ textAlign: 'center', marginBottom: '2.5rem', position: 'relative' }}>
+                    <div className="section-tag" style={{ justifyContent: 'center', marginBottom: '0.85rem' }}>Client Portal</div>
+                    <h2 className="title-serif-large" style={{ margin: '0.5rem 0 1rem 0' }}>Client Resources</h2>
+                    <p className="subtext" style={{ margin: '0 auto', maxWidth: '680px' }}>
+                      Forms, documents and resources you may need — all in one place.
+                    </p>
+                    <div style={{ marginTop: '0.85rem' }}>
+                      <span className="resource-meta-tag" style={{ background: 'rgba(22, 163, 74, 0.08)', color: 'var(--color-success)', borderColor: 'rgba(22, 163, 74, 0.25)', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                        <Unlock size={12} /> Verified Client Portal Access
+                      </span>
                     </div>
                   </div>
-                ))}
+
+              {/* Search & Category Filter Controls */}
+              <div className="resource-filter-container">
+                <div className="resource-search-box">
+                  <Search size={16} className="search-icon" />
+                  <input 
+                    type="text" 
+                    placeholder="Search forms, documents, or portals..." 
+                    className="resource-search-input"
+                    value={resourceSearch}
+                    onChange={(e) => setResourceSearch(e.target.value)}
+                  />
+                  {resourceSearch && (
+                    <button className="search-clear-btn" onClick={() => setResourceSearch('')}>
+                      <X size={14} />
+                    </button>
+                  )}
+                </div>
+
+                <div className="resource-category-tabs">
+                  {['All', 'Investment', 'Insurance', 'KYC', 'External Portals'].map((cat) => (
+                    <button
+                      key={cat}
+                      className={`resource-tab ${resourceCategory === cat ? 'active' : ''}`}
+                      onClick={() => setResourceCategory(cat)}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        )}
+
+              {/* Document Groups Container */}
+              <div className="resource-groups-wrapper">
+                
+                {/* Section 1: Official Policy & Servicing Forms */}
+                {(resourceCategory === 'All' || resourceCategory === 'Insurance' || resourceCategory === 'Client Forms') && (
+                  <div className="resource-group-block">
+                    <div className="resource-group-header">
+                      <div className="group-header-badge">POLICY & SERVICING FORMS</div>
+                      <p className="group-header-sub">Official documents for policy servicing, claim requests & bank mandates downloadable directly from our website.</p>
+                    </div>
+
+                    <div className="resource-grid">
+                      {filteredResources
+                        .filter(f => f.sectionGroup === 'Giri Investment Forms')
+                        .map((file) => (
+                          <div key={file.id} className="resource-card-compact">
+                            <div className="resource-card-left">
+                              <div className="resource-icon-badge">
+                                {file.externalUrl ? <Globe size={18} /> : <FileText size={18} />}
+                              </div>
+                              <div className="resource-card-content">
+                                <div className="resource-card-top-row">
+                                  <h3 className="resource-title">{file.title}</h3>
+                                </div>
+                                <p className="resource-desc">{file.desc}</p>
+                                <div className="resource-timestamp">
+                                  <span>Updated {file.updated || 'Aug 2026'}</span>
+                                </div>
+                                
+                                {downloadingFileId === file.id && (
+                                  <div className="download-progress-bar-container" style={{ marginTop: '0.4rem' }}>
+                                    <div className="download-progress-bar-fill"></div>
+                                  </div>
+                                )}
+                                
+                                {downloadCompletedId === file.id && (
+                                  <div style={{ color: 'var(--color-success)', fontFamily: 'var(--font-mono)', fontSize: '0.72rem', marginTop: '0.35rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                    <Check size={13} /> File downloaded to device!
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="resource-card-actions">
+                              {file.previewUrl && (
+                                <a 
+                                  href={file.previewUrl} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="btn btn-outline resource-btn-preview"
+                                >
+                                  Preview
+                                </a>
+                              )}
+                              <button 
+                                className="btn btn-primary resource-btn-action" 
+                                onClick={() => handleDownloadTrigger(file.id)}
+                                disabled={downloadingFileId !== null}
+                              >
+                                <ArrowDownToLine size={14} /> {downloadingFileId === file.id ? 'Downloading...' : 'Download'}
+                              </button>
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+                )}
+
+                {/* Section 2: KYC & Investment Forms */}
+                {(resourceCategory === 'All' || resourceCategory === 'Investment' || resourceCategory === 'KYC' || resourceCategory === 'Client Forms') && (
+                  <div className="resource-group-block">
+                    <div className="resource-group-header">
+                      <div className="group-header-badge">KYC & INVESTMENT FORMS</div>
+                      <p className="group-header-sub">KYC application forms used for investor onboarding and KYC-related requirements.</p>
+                    </div>
+
+                    <div className="resource-grid">
+                      {filteredResources
+                        .filter(f => f.sectionGroup === 'KYC & Investment Forms')
+                        .map((file) => (
+                          <div key={file.id} className="resource-card-compact">
+                            <div className="resource-card-left">
+                              <div className="resource-icon-badge">
+                                {file.externalUrl ? <Globe size={18} /> : <FileText size={18} />}
+                              </div>
+                              <div className="resource-card-content">
+                                <div className="resource-card-top-row">
+                                  <h3 className="resource-title">{file.title}</h3>
+                                </div>
+                                <p className="resource-desc">{file.desc}</p>
+                                <div className="resource-timestamp">
+                                  <span>Updated {file.updated || 'Aug 2026'}</span>
+                                </div>
+                                
+                                {downloadingFileId === file.id && (
+                                  <div className="download-progress-bar-container" style={{ marginTop: '0.4rem' }}>
+                                    <div className="download-progress-bar-fill"></div>
+                                  </div>
+                                )}
+                                
+                                {downloadCompletedId === file.id && (
+                                  <div style={{ color: 'var(--color-success)', fontFamily: 'var(--font-mono)', fontSize: '0.72rem', marginTop: '0.35rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                    <Check size={13} /> File downloaded to device!
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="resource-card-actions">
+                              {file.previewUrl && (
+                                <a 
+                                  href={file.previewUrl} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="btn btn-outline resource-btn-preview"
+                                >
+                                  Preview
+                                </a>
+                              )}
+                              <button 
+                                className="btn btn-primary resource-btn-action" 
+                                onClick={() => handleDownloadTrigger(file.id)}
+                                disabled={downloadingFileId !== null}
+                              >
+                                <ArrowDownToLine size={14} /> {downloadingFileId === file.id ? 'Downloading...' : 'Download'}
+                              </button>
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+                )}
+
+                {/* Section 3: Official External Resources */}
+                {(resourceCategory === 'All' || resourceCategory === 'External Portals') && (
+                  <div className="resource-group-block">
+                    <div className="resource-group-header">
+                      <div className="group-header-badge portal-badge">OFFICIAL RESOURCES</div>
+                      <p className="group-header-sub">Verified links to third-party institution portals for online verification & official forms.</p>
+                    </div>
+
+                    <div className="resource-grid">
+                      {filteredResources
+                        .filter(f => f.sectionGroup === 'Official Resources')
+                        .map((file) => (
+                          <div key={file.id} className="resource-card-compact">
+                            <div className="resource-card-left">
+                              <div className="resource-icon-badge" style={{ background: 'rgba(2, 132, 199, 0.08)', color: '#0284c7' }}>
+                                <Globe size={18} />
+                              </div>
+                              <div className="resource-card-content">
+                                <div className="resource-card-top-row">
+                                  <h3 className="resource-title">{file.title}</h3>
+                                </div>
+                                <p className="resource-desc">{file.desc}</p>
+                                <div className="resource-timestamp">
+                                  <span>Verified {file.updated || 'Aug 2026'}</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="resource-card-actions">
+                              <button 
+                                className="btn btn-primary resource-btn-action" 
+                                style={{ background: '#0284c7', borderColor: '#0284c7' }}
+                                onClick={() => handleDownloadTrigger(file.id)}
+                              >
+                                Open Official Portal <ExternalLink size={13} />
+                              </button>
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+                )}
+
+                {/* Empty State when no results match search */}
+                {filteredResources.length === 0 && (
+                  <div style={{ textAlign: 'center', padding: '3rem 1rem', background: '#ffffff', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                    <Search size={32} style={{ color: '#94a3b8', marginBottom: '0.75rem' }} />
+                    <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', color: '#0f172a', margin: '0 0 0.5rem 0' }}>No matching resources found</h4>
+                    <p style={{ fontSize: '0.88rem', color: '#64748b', margin: 0 }}>Try clearing your search term or selecting "All" categories.</p>
+                    <button 
+                      className="btn btn-outline" 
+                      style={{ marginTop: '1rem', padding: '0.45rem 1.1rem', fontSize: '0.75rem' }}
+                      onClick={() => { setResourceSearch(''); setResourceCategory('All'); }}
+                    >
+                      Clear Search & Filters
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Institutional Legal Disclaimer Note */}
+              <div className="resource-legal-disclaimer">
+                <ShieldCheck size={20} className="disclaimer-icon" />
+                <span>
+                  <strong>Important Disclaimer:</strong> Forms and requirements may change from time to time. Please verify the latest version and applicable requirements with the relevant institution before submission.
+                </span>
+              </div>
+            </>
+          )}
+
+        </div>
+      </section>
+    )}
 
       </main>
 

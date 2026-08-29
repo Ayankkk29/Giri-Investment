@@ -5337,6 +5337,374 @@ textarea.calc-number-input:focus {
   }
 }
 
+/* ==========================================================================
+   CLIENT RESOURCES (PREMIUM 25-35% SHORTER COMPACT CARD PORTAL STYLES)
+   ========================================================================== */
+
+.resource-filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 900px;
+  margin: 0 auto 3rem auto;
+}
+
+.resource-search-box {
+  position: relative;
+  width: 100%;
+}
+
+.resource-search-input {
+  width: 100%;
+  padding: 0.85rem 2.8rem 0.85rem 2.75rem;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: #0f172a;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+  transition: all 0.3s ease;
+}
+
+.resource-search-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.resource-search-box .search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e2e8f0;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #475569;
+}
+
+.resource-category-tabs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.resource-tab {
+  padding: 0.45rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.resource-tab.active,
+.resource-tab:hover {
+  background: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.resource-groups-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.resource-group-header {
+  margin-bottom: 1rem;
+}
+
+.group-header-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 1.5px;
+  margin-bottom: 0.25rem;
+  display: inline-block;
+}
+
+.group-header-badge.portal-badge {
+  color: #0284c7;
+}
+
+.group-header-sub {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.resource-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* COMPACT SHORTER CARD DESIGN (25-35% REDUCTION IN HEIGHT) */
+.resource-card-compact {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--color-accent);
+  border-radius: 10px;
+  padding: 0.95rem 1.35rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+  transition: all 0.25s ease;
+}
+
+.resource-card-compact:hover {
+  transform: translateY(-2px);
+  border-color: #3b82f6;
+  border-left-color: var(--color-accent);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08);
+}
+
+.resource-card-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.resource-icon-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.resource-card-content {
+  flex: 1;
+}
+
+.resource-card-top-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.resource-title {
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.resource-meta-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  background: rgba(37, 99, 235, 0.08);
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.resource-desc {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0.15rem 0 0.2rem 0;
+  line-height: 1.35;
+}
+
+.resource-timestamp {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #94a3b8;
+}
+
+.resource-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.resource-btn-preview {
+  padding: 0.45rem 0.85rem !important;
+  font-size: 0.72rem !important;
+  border-radius: 6px !important;
+}
+
+.resource-btn-action {
+  padding: 0.5rem 1.15rem !important;
+  font-size: 0.75rem !important;
+  border-radius: 6px !important;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* LEGAL DISCLAIMER BOX */
+.resource-legal-disclaimer {
+  max-width: 1000px;
+  margin: 3.5rem auto 0 auto;
+  padding: 1rem 1.35rem;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.82rem;
+  color: #475569;
+  text-align: left;
+}
+
+.disclaimer-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* RESPONSIVE STACKING FOR MOBILE (< 640px) */
+@media (max-width: 640px) {
+  .resource-card-compact {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    gap: 0.85rem;
+  }
+  .resource-card-left {
+    align-items: flex-start;
+  }
+  .resource-card-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+  .resource-card-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .resource-btn-preview,
+  .resource-btn-action {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* ==========================================================================
+   CLIENT RESOURCES ACCESS GATEKEEPER (LOCKED PORTAL STYLES)
+   ========================================================================== */
+
+.client-gate-container {
+  max-width: 620px;
+  margin: 1.5rem auto 4rem auto;
+  padding: 0 1rem;
+}
+
+.client-gate-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-top: 5px solid var(--color-accent);
+  border-radius: 16px;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08), 0 4px 15px rgba(37, 99, 235, 0.05);
+  text-align: center;
+}
+
+.gate-lock-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.5rem auto;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.gate-title {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0.25rem 0 0.75rem 0;
+}
+
+.gate-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 1.75rem;
+}
+
+.gate-form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.gate-submit-btn {
+  width: 100%;
+  padding: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: 10px;
+  justify-content: center;
+  margin-top: 0.5rem;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+}
+
+.gate-privacy-note {
+  font-size: 0.78rem;
+  color: #64748b;
+  text-align: center;
+  margin-top: 0.75rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .client-gate-card {
+    padding: 1.5rem 1.25rem;
+  }
+  .gate-title {
+    font-size: 1.5rem;
+  }
+}
+
 
 
 
