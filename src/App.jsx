@@ -2556,7 +2556,7 @@ function LuxuryPreloader() {
                       )}
                     </div>
 
-                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <div className="download-actions-group">
                       {file.previewUrl && (
                         <a 
                           href={file.previewUrl} 
