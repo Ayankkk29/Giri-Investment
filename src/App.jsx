@@ -755,7 +755,7 @@ function App() {
       formData.append('access_key', accessKey);
       formData.append('name', gateName);
       formData.append('email', gateEmail);
-      formData.append('subject', `[Client Resource Unlock Lead] ${gateName} - ${gatePhone}`);
+      formData.append('subject', `[Verified Client] Resource Access Request — ${gateName} (${gateAddress})`);
       formData.append('message', `New Verified Client Access Request:\n\nClient Name: ${gateName}\nPhone/WhatsApp: ${gatePhone}\nGmail/Email: ${gateEmail}\nAddress: ${gateAddress}\nRequested At: ${new Date().toLocaleString()}`);
       formData.append('from_name', 'Giri Investment Client Portal');
 
