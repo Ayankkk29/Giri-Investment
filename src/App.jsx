@@ -312,22 +312,65 @@ function FloatingSocialDock() {
 }
 
 // ----------------------------------------------------
+// ----------------------------------------------------
 // Live NSE / BSE Market Ticker Tape Component
 // ----------------------------------------------------
 function MarketTickerTape() {
-  const tickerItems = [
+  const [tickerItems, setTickerItems] = useState([
     { name: 'Nifty 50', val: '₹24,318.50', change: '+0.71%', up: true, link: 'https://www.nseindia.com/' },
     { name: 'Sensex', val: '79,842.10', change: '+0.65%', up: true, link: 'https://www.bseindia.com/' },
     { name: 'Nifty Bank', val: '₹52,140.20', change: '+0.45%', up: true, link: 'https://www.nseindia.com/market-data/live-equity-market' },
     { name: 'Nifty Midcap 100', val: '₹58,420.15', change: '+0.82%', up: true, link: 'https://www.nseindia.com/' },
-    { name: 'SBI Small Cap NAV', val: '₹168.42', change: '+1.12%', up: true, link: 'https://www.nseindia.com/' },
+    { name: 'SBI Small Cap NAV', val: '₹216.40', change: '+0.15%', up: true, link: 'https://www.nseindia.com/' },
     { name: 'Nippon Small Cap NAV', val: '₹154.20', change: '+1.35%', up: true, link: 'https://www.nseindia.com/' },
     { name: 'ICICI Balanced NAV', val: '₹62.19', change: '+0.31%', up: true, link: 'https://www.nseindia.com/' },
     { name: 'Kaveri Corp Bond NAV', val: '₹27.85', change: '-0.04%', up: false, link: 'https://www.nseindia.com/' },
     { name: 'Sundaram Eq Savings NAV', val: '₹58.03', change: '+0.62%', up: true, link: 'https://www.nseindia.com/' },
     { name: 'HDFC Top 100 NAV', val: '₹988.50', change: '+0.55%', up: true, link: 'https://www.nseindia.com/' },
     { name: 'Gold 24K (10g)', val: '₹74,250', change: '+0.25%', up: true, link: 'https://www.bseindia.com/' },
-  ];
+  ]);
+
+  useEffect(() => {
+    // Live AMFI API fetch for real-time Mutual Fund NAVs
+    const fetchLiveNavs = async () => {
+      try {
+        const schemes = [
+          { code: 125497, index: 4 }, // SBI Small Cap Fund
+          { code: 118778, index: 5 }, // Nippon India Small Cap Fund
+          { code: 120586, index: 6 }, // ICICI Prudential Equity & Debt
+          { code: 101831, index: 9 }  // HDFC Top 100 Fund
+        ];
+
+        for (const s of schemes) {
+          const res = await fetch(`https://api.mfapi.in/mf/${s.code}`);
+          const json = await res.json();
+          if (json && json.data && json.data.length >= 2) {
+            const latestNav = parseFloat(json.data[0].nav);
+            const prevNav = parseFloat(json.data[1].nav);
+            const pctChange = (((latestNav - prevNav) / prevNav) * 100).toFixed(2);
+            const isUp = parseFloat(pctChange) >= 0;
+
+            setTickerItems(prevItems => {
+              const updated = [...prevItems];
+              if (updated[s.index]) {
+                updated[s.index] = {
+                  ...updated[s.index],
+                  val: `₹${latestNav.toFixed(2)}`,
+                  change: `${isUp ? '+' : ''}${pctChange}%`,
+                  up: isUp
+                };
+              }
+              return updated;
+            });
+          }
+        }
+      } catch (err) {
+        console.warn('Live ticker NAV fetch warning:', err);
+      }
+    };
+
+    fetchLiveNavs();
+  }, []);
 
   return (
     <div className="market-ticker-wrapper">
