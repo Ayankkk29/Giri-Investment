@@ -13,8 +13,7 @@ import {
   ExternalLink,
   ShieldCheck,
   Globe,
-  Lock,
-  Unlock
+  Lock
 } from 'lucide-react';
 import './App.css';
 import { 
@@ -1377,10 +1376,6 @@ function LuxuryPreloader() {
                         {activeTab === 'insurance' && 'Insurance Cover Planner'}
                       </h3>
                     </div>
-                    <div className="live-badge">
-                      <span className="live-badge-dot"></span>
-                      LIVE CALCULATION
-                    </div>
                   </div>
 
                   <div className="calc-tabs">
@@ -2061,10 +2056,6 @@ function LuxuryPreloader() {
                           <span className="caption-label dark" style={{ fontSize: '0.65rem' }}>Life Valuation</span>
                           <h3 className="calc-title">HLV Cover Planner</h3>
                         </div>
-                        <div className="live-badge">
-                          <span className="live-badge-dot"></span>
-                          CALCULATION
-                        </div>
                       </div>
 
                       <div className="calc-grid" style={{ gridTemplateColumns: '1fr' }}>
@@ -2293,10 +2284,6 @@ function LuxuryPreloader() {
                           <span className="caption-label dark" style={{ fontSize: '0.65rem' }}>General Valuation</span>
                           <h3 className="calc-title">Vehicle IDV Planner</h3>
                         </div>
-                        <div className="live-badge">
-                          <span className="live-badge-dot"></span>
-                          CALCULATION
-                        </div>
                       </div>
 
                       <div className="calc-grid" style={{ gridTemplateColumns: '1fr' }}>
@@ -2507,10 +2494,6 @@ function LuxuryPreloader() {
                         <div>
                           <span className="caption-label dark" style={{ fontSize: '0.65rem' }}>Mediclaim Valuation</span>
                           <h3 className="calc-title">Premium Estimator</h3>
-                        </div>
-                        <div className="live-badge">
-                          <span className="live-badge-dot"></span>
-                          CALCULATION
                         </div>
                       </div>
 
@@ -2846,11 +2829,6 @@ function LuxuryPreloader() {
                     <p className="subtext" style={{ margin: '0 auto', maxWidth: '680px' }}>
                       Forms, documents and resources you may need — all in one place.
                     </p>
-                    <div style={{ marginTop: '0.85rem' }}>
-                      <span className="resource-meta-tag" style={{ background: 'rgba(22, 163, 74, 0.08)', color: 'var(--color-success)', borderColor: 'rgba(22, 163, 74, 0.25)', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                        <Unlock size={12} /> Verified Client Portal Access
-                      </span>
-                    </div>
                   </div>
 
               {/* Search & Category Filter Controls */}
@@ -3546,9 +3524,6 @@ function LuxuryPreloader() {
               <button className="mobile-calc-back-btn" onClick={() => setShowMobileCalcModal(false)}>
                 <ArrowLeft size={18} /> Back to Home
               </button>
-              <div className="live-badge">
-                <span className="live-badge-dot"></span> LIVE CALCULATION
-              </div>
             </div>
 
             <div className="mobile-calc-modal-body">
