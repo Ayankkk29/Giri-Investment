@@ -790,7 +790,7 @@ function App() {
     if (!gateName || !gatePhone || !gateAddress || !gateEmail) return;
 
     setGateSubmitting(true);
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '96fe992e-4c75-41e7-8643-c33dddf5c938';
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
 
     try {
       const formData = new FormData();
@@ -851,7 +851,7 @@ function App() {
     
     setContactSending(true);
 
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '96fe992e-4c75-41e7-8643-c33dddf5c938';
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
 
     try {
       const formData = new FormData();
@@ -976,7 +976,7 @@ function App() {
     e.preventDefault();
     if (!healthHelpName || !healthHelpEmail || !healthHelpPhone) return;
 
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '96fe992e-4c75-41e7-8643-c33dddf5c938';
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
 
     try {
       const formData = new FormData();
